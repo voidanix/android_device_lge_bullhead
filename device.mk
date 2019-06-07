@@ -526,10 +526,9 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     android.hardware.usb@1.0-service
 
-# TODO: build our own vendor images
 #Vendor Patch Level
-#PRODUCT_PROPERTY_OVERRIDES += \
-#    ro.vendor.build.security_patch=2018-12-05
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.vendor.build.security_patch=2018-12-05
 
 # Modem debugger/misc
 ifneq (,$(filter userdebug eng, $(TARGET_BUILD_VARIANT)))
