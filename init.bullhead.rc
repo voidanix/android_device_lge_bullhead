@@ -68,8 +68,6 @@ on init
     mkdir /persist 0771 system system
     mkdir /firmware 0771 system system
 
-    symlink /sdcard /storage/sdcard0
-
     # NXP HAL expects /dev/pn54x
     symlink /dev/pn548 /dev/pn54x
 
