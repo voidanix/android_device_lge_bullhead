@@ -26,10 +26,10 @@ on early-init
     chown system system /sys/kernel/debug/kgsl/proc
 
 on charger
-    # disable FPS clk
+    # Disable FPS clk
     write /sys/bus/spi/drivers/fpc1020/spi1.2/clk_enable 0
 
-    # low power governing
+    # Low power governing
     write /sys/devices/system/cpu/cpu1/online 0
     write /sys/devices/system/cpu/cpu2/online 0
     write /sys/devices/system/cpu/cpu3/online 0
@@ -49,9 +49,9 @@ on charger
     write /sys/module/lpm_levels/system/a57/a57-l2-retention/idle_enabled 0
 
 on property:sys.boot_completed=1
-    # allow CPUs to go in deeper idle state than C0
+    # Allow CPUs to go in deeper idle state than C0
     write /sys/module/lpm_levels/parameters/sleep_disabled 0
-    #end boot time fs tune
+    # End boot time fs tune
     write /sys/block/mmcblk0/queue/scheduler noop
     write /sys/block/mmcblk0/queue/rq_affinity 0
     write /sys/block/mmcblk0/queue/read_ahead_kb 128
@@ -83,7 +83,7 @@ on fs
     restorecon_recursive /persist
 
 on early-boot
-    # set RLIMIT_MEMLOCK to 64MB
+    # Set RLIMIT_MEMLOCK to 64MB
     setrlimit 8 67108864 67108864
 
     # Allow subsystem (modem etc) debugging
@@ -99,12 +99,12 @@ on early-boot
     exec - root root system -- /system/bin/init.qcom.devwait.sh
 
 on boot
-    # execute script to set initial CPU settings
-    # don't run as a service to avoid race conditions
+    # Execute script to set initial CPU settings
+    # Don't run as a service to avoid race conditions
     exec - root root system -- /system/bin/init.bullhead.power.sh
 
-    # update foreground cpuset now that processors are up
-    # foreground gets all CPUs except CPU 3
+    # Update foreground cpuset now that processors are up
+    # Foreground gets all CPUs except CPU 3
     # CPU 3 is reserved for the top app
     write /dev/cpuset/foreground/cpus 0-2,4-5
     write /dev/cpuset/background/cpus 0
@@ -126,10 +126,10 @@ on boot
     chown system system /sys/bus/spi/drivers/fpc1020/spi1.2/wakeup_enable
     chown system system /sys/bus/spi/drivers/fpc1020/spi1.2/irq
 
-    # create symlink for fb1 as HDMI
+    # Create symlink for fb1 as HDMI
     symlink /dev/graphics/fb1 /dev/graphics/hdmi
 
-    # setup permissions for fb1 related nodes
+    # Setup permissions for fb1 related nodes
     chown system graphics /sys/class/graphics/fb1/hpd
     chown system graphics /sys/class/graphics/fb1/vendor_name
     chown system graphics /sys/class/graphics/fb1/product_description
@@ -144,7 +144,7 @@ on boot
     # Allow QMUX daemon to assign port open wait time
     chown radio radio /sys/devices/virtual/hsicctl/hsicctl0/modem_wait
 
-    #Create QMUX deamon socket area
+    # Create QMUX deamon socket area
     mkdir /dev/socket/qmux_radio 0770 radio radio
     chmod 2770 /dev/socket/qmux_radio
     mkdir /dev/socket/qmux_audio 0770 media audio
@@ -203,7 +203,7 @@ on post-fs
     chmod 0222 /sys/kernel/debug/tracing/trace_marker
 
 on post-fs-data
-    # boot time fs tune
+    # Boot time fs tune
     write /sys/block/mmcblk0/queue/iostats 0
     write /sys/block/mmcblk0/queue/scheduler cfq
     write /sys/block/mmcblk0/queue/iosched/slice_idle 0
@@ -218,7 +218,7 @@ on post-fs-data
     chown radio radio /data/misc/radio/copy_complete
     chmod 0660 /data/misc/radio/copy_complete
 
-    #Update touch firmware if required
+    # Update touch firmware if required
     write /sys/bus/i2c/devices/2-0020/check_fw 1
     write /sys/devices/soc.0/f9924000.i2c/power/control on
 
@@ -236,7 +236,7 @@ on post-fs-data
     # NFC: create data/nfc for nv storage
     mkdir /data/vendor/nfc 0770 nfc nfc
 
-    # use qcril.db to handle Ecc and load MBN
+    # Use qcril.db to handle Ecc and load MBN
     copy /system/etc/qcril.db /data/misc/radio/qcril.db
     chown radio radio /data/misc/radio/qcril.db
     chmod 0600 /data/misc/radio/qcril.db
@@ -244,7 +244,7 @@ on post-fs-data
     # Create folder for mm-qcamera-daemon
     mkdir /data/misc/camera 0770 camera camera
 
-    # change permission for ldaf
+    # Change permission for ldaf
     chown input system /persist/calibration
     chmod 0650 /persist/calibration
     chown input system /persist/calibration/offset
@@ -252,7 +252,7 @@ on post-fs-data
     chown input system /persist/calibration/xtalk
     chmod 0640 /persist/calibration/xtalk
 
-    #Create directories for Location services
+    # Create directories for Location services
     mkdir /data/misc/location 0770 gps gps
     mkdir /data/misc/location/mq 0770 gps gps
     mkdir /data/misc/location/xtwifi 0770 gps gps
@@ -261,7 +261,7 @@ on post-fs-data
     # Audio
     mkdir /data/misc/audio 0770 audio audio
 
-    # perf daemon
+    # Perf daemon
     mkdir /data/misc/perfd 0755 root system
     chmod 2755 /data/misc/perfd
     rm /data/misc/perfd/default_values
@@ -356,7 +356,7 @@ service wpa_supplicant /vendor/bin/hw/wpa_supplicant \
     -O/data/vendor/wifi/wpa/sockets \
     -puse_p2p_group_interface=1 \
     -g@android:wpa_wlan0
-#   we will start as root and wpa_supplicant will switch to user wifi
+#   We will start as root and wpa_supplicant will switch to user wifi
 #   after setting up the capabilities required for WEXT
 #   user wifi
 #   group wifi inet keystore
@@ -368,7 +368,7 @@ service wpa_supplicant /vendor/bin/hw/wpa_supplicant \
     oneshot
 
 service loc_launcher /system/bin/loc_launcher
-    #loc_launcher will start as root and set its uid to gps
+    # loc_launcher will start as root and set its uid to gps
     class late_start
     group gps inet net_raw diag net_admin wifi
 
@@ -447,7 +447,7 @@ service bullhead-sh /system/bin/init.bullhead.sh
     group system
     oneshot
 
-# bugreport is triggered by holding down volume down, volume up and power
+# Bugreport is triggered by holding down volume down, volume up and power
 service bugreport /system/bin/dumpstate -d -p -B -z \
         -o /data/user_de/0/com.android.shell/files/bugreports/bugreport
     class main
