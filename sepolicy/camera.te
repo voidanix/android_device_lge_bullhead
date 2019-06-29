@@ -1,5 +1,5 @@
 # Qualcomm MSM camera
-type camera, domain;
+type camera, domain, device_domain_deprecated;
 type camera_exec, exec_type, vendor_file_type, file_type;
 
 init_daemon_domain(camera)
@@ -23,11 +23,11 @@ allow camera hal_renderscript_hwservice:hwservice_manager find;
 # Create camera socket
 allow camera camera_data_file:sock_file { create unlink };
 
-# Read/write to /data/misc/camera
+# read/write to /data/misc/camera
 allow camera camera_data_file:dir w_dir_perms;
 allow camera camera_data_file:file create_file_perms;
 
-# Write to /sys/kernel/range/enable_ps_sensor
+# write to /sys/kernel/range/enable_ps_sensor
 allow camera sysfs_camera:file rw_file_perms;
 
 # Read to /dev/input
@@ -51,7 +51,3 @@ allow camera debugfs_kgsl_proc:dir { search read open };
 allow camera debugfs_kgsl_proc:file { read write getattr setattr };
 
 allow camera hal_camera_default:fd { use };
-
-# For v4L node "name" access
-allow camera sysfs_graphics:file rw_file_perms;
-allow camera ion_device:chr_file rw_file_perms;
