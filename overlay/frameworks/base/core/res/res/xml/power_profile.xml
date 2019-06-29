@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
 **
-** Copyright 2015, The Android Open Source Project
+** Copyright (C) 2015 The Android Open Source Project
+** Copyright (C) 2019 The LineageOS Project
 **
 ** Licensed under the Apache License, Version 2.0 (the "License")
 ** you may not use this file except in compliance with the License.
@@ -32,9 +33,9 @@
     </array>
 
     <!-- Power consumption when CPU is suspended -->
-    <item name="cpu.idle">0.075</item>
+    <item name="cpu.suspend">0.075</item>
     <!-- Additional power consumption when CPU is in a kernel idle loop -->
-    <item name="cpu.awake">4.397</item>
+    <item name="cpu.idle">4.397</item>
 
     <!-- Different CPU speeds as reported in
          /sys/devices/system/cpu/cpu0/cpufreq/scaling_available_frequencies -->
