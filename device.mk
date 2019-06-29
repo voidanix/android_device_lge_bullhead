@@ -62,7 +62,7 @@ PRODUCT_COPY_FILES += \
     frameworks/av/services/audiopolicy/config/usb_audio_policy_configuration.xml:system/etc/usb_audio_policy_configuration.xml \
     frameworks/av/services/audiopolicy/config/default_volume_tables.xml:system/etc/default_volume_tables.xml
 
-#Sound Trigger
+# Sound Trigger
 PRODUCT_COPY_FILES += \
     device/lge/bullhead/sound_trigger_mixer_paths.xml:system/etc/sound_trigger_mixer_paths.xml \
     device/lge/bullhead/sound_trigger_platform_info.xml:system/etc/sound_trigger_platform_info.xml
@@ -149,12 +149,12 @@ PRODUCT_TAGS += dalvik.gc.type-precise
 
 PRODUCT_AAPT_CONFIG := normal
 PRODUCT_AAPT_PREF_CONFIG := xxhdpi
-# A list of dpis to select prebuilt apk, in precedence order.
+# A list of dpis to select prebuilt apk, in precedence order
 PRODUCT_AAPT_PREBUILT_DPI := xxhdpi xhdpi hdpi
 
 PRODUCT_CHARACTERISTICS := nosdcard
 
-# for off charging mode
+# For off charging mode
 PRODUCT_PACKAGES += \
     charger_res_images
 
@@ -179,7 +179,7 @@ PRODUCT_PACKAGES += \
     android.hardware.renderscript@1.0-impl
 
 PRODUCT_PACKAGES += \
-    android.hardware.drm@1.0-impl \
+    android.hardware.drm@1.0-impl
 
 PRODUCT_PACKAGES += \
     libc2dcolorconvert \
@@ -291,9 +291,9 @@ PRODUCT_PACKAGES += \
     android.hardware.contexthub@1.0-impl.nanohub \
     android.hardware.contexthub@1.0-service
 
-# new gatekeeper HAL
-PRODUCT_PACKAGES +=                         \
-    android.hardware.gatekeeper@1.0-impl    \
+# New gatekeeper HAL
+PRODUCT_PACKAGES += \
+    android.hardware.gatekeeper@1.0-impl
 
 ifeq ($(TARGET_USES_CHINOOK_SENSORHUB),true)
 PRODUCT_PACKAGES += \
@@ -303,7 +303,7 @@ PRODUCT_PACKAGES += \
     nanoapp_cmd
 endif
 
-# sensor utilities (only for userdebug and eng builds)
+# Sensor utilities (only for userdebug and eng builds)
 ifneq (,$(filter userdebug eng, $(TARGET_BUILD_VARIANT)))
 PRODUCT_PACKAGES += \
     nanotool \
@@ -398,7 +398,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     drm.service.enabled=true
 
-# for perfd
+# For perfd
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.min_freq_0=384000 \
     ro.min_freq_4=384000
@@ -424,7 +424,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ril.nosim.ecc_list_count=1 \
     ril.nosim.ecc_list_1=111,113,117,122,125
 
-# low audio flinger standby delay to reduce power consumption
+# Low audio flinger standby delay to reduce power consumption
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.audio.flinger_standbytime_ms=300
 
@@ -445,7 +445,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.radio.always_send_plmn=true
 
-# Ril sends only one RIL_UNSOL_CALL_RING, so set call_ring.multiple to false
+# RIL sends only one RIL_UNSOL_CALL_RING, so set call_ring.multiple to false
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.telephony.call_ring.multiple=0
 
@@ -457,8 +457,8 @@ PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
     persist.radio.snapshot_enabled=1 \
     persist.radio.snapshot_timer=10
 
-# If data_no_toggle is 0 there are no reports if the screen is off.
-# If data_no_toggle is 1 then dormancy indications will come with screen off.
+# If data_no_toggle is 0 there are no reports if the screen is off
+# If data_no_toggle is 1 then dormancy indications will come with screen off
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.radio.data_no_toggle=1
 
@@ -489,7 +489,7 @@ PRODUCT_PACKAGES += \
     libbt-vendor \
     android.hardware.bluetooth@1.0-impl
 
-# limit dex2oat threads to improve thermals
+# Limit dex2oat threads to improve thermals
 PRODUCT_PROPERTY_OVERRIDES += \
     dalvik.vm.boot-dex2oat-threads=4 \
     dalvik.vm.dex2oat-threads=4 \
@@ -511,22 +511,26 @@ PRODUCT_PROPERTY_OVERRIDES += \
 # Power HAL
 PRODUCT_PACKAGES += \
     power.bullhead \
-    android.hardware.power@1.0-impl \
+    android.hardware.power@1.0-impl
 
 # Thermal HAL
 PRODUCT_PACKAGES += \
     thermal.bullhead \
-    android.hardware.thermal@1.0-impl \
+    android.hardware.thermal@1.0-impl
 
-#GNSS HAL
+# Trust
+PRODUCT_PACKAGES += \
+    vendor.lineage.trust@1.0-service
+
+# GNSS HAL
 PRODUCT_PACKAGES += \
     android.hardware.gnss@1.0-impl
 
-#USB HAL
+# USB HAL
 PRODUCT_PACKAGES += \
     android.hardware.usb@1.0-service
 
-#Vendor Patch Level
+# Vendor Patch Level
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.vendor.build.security_patch=2018-12-05
 
@@ -546,17 +550,17 @@ PRODUCT_COPY_FILES += \
     device/lge/bullhead/init.bullhead.misc.rc.user:root/init.bullhead.misc.rc
 endif
 
-# Set if a device image has the VTS coverage instrumentation.
+# Set if a device image has the VTS coverage instrumentation
 ifeq ($(NATIVE_COVERAGE),true)
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.vts.coverage=1
 endif
 
-# only include verity on user builds for LineageOS
+# Only include verity on user builds for LineageOS
 ifeq ($(TARGET_BUILD_VARIANT),user)
    PRODUCT_COPY_FILES += device/lge/bullhead/fstab-verity.bullhead:root/fstab.bullhead
 
-# setup dm-verity configs.
+# Setup dm-verity configs.
 PRODUCT_SYSTEM_VERITY_PARTITION := /dev/block/platform/soc.0/f9824900.sdhci/by-name/system
 #PRODUCT_VENDOR_VERITY_PARTITION := /dev/block/platform/soc.0/f9824900.sdhci/by-name/vendor
 $(call inherit-product, build/target/product/verity.mk)
@@ -570,11 +574,11 @@ PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.sys.disable_rescue=true
 
-# ro.product.first_api_level indicates the first api level the device has commercially launched on.
+# ro.product.first_api_level indicates the first api level the device has commercially launched on
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.product.first_api_level=23
 
-# setup dalvik vm configs.
+# Setup Dalvik VM configs
 $(call inherit-product, frameworks/native/build/phone-xhdpi-2048-dalvik-heap.mk)
 
 $(call inherit-product-if-exists, hardware/qcom/msm8994/msm8992.mk)
