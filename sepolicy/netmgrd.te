@@ -1,5 +1,5 @@
 # Network utilities (radio process)
-type netmgrd, domain, device_domain_deprecated;
+type netmgrd, domain;
 type netmgrd_exec, exec_type, file_type;
 
 # Uses network sockets.
@@ -68,3 +68,6 @@ allow netmgrd toolbox_exec:file rx_file_perms;
 
 #Allow netmgrd to use wakelock
 wakelock_use(netmgrd)
+
+allow netmgrd sysfs_esoc:dir r_dir_perms;
+allow netmgrd sysfs_esoc:file r_file_perms;
