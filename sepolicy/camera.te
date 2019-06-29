@@ -51,3 +51,7 @@ allow camera debugfs_kgsl_proc:dir { search read open };
 allow camera debugfs_kgsl_proc:file { read write getattr setattr };
 
 allow camera hal_camera_default:fd { use };
+
+allow gallery_app debugfs_kgsl:dir search;
+allow snap_app debugfs_kgsl:dir search;
+allow snap_app debugfs_kgsl_proc:dir search;
