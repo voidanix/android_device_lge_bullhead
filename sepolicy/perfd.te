@@ -35,5 +35,3 @@ allow perfd cameraserver:process signull;
 
 allow perfd sysfs_ksm:dir { search read open };
 allow perfd sysfs_ksm:file rw_file_perms;
-
-allow perfd system_server:process signull;
