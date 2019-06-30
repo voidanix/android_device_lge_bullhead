@@ -1,1 +1,1 @@
-allow gallery_app debugfs_kgsl:dir search;
+#allow gallery_app debugfs_kgsl:dir search;

@@ -1,1 +1,1 @@
-allow snap_app debugfs_kgsl:dir search;
+#allow snap_app debugfs_kgsl:dir search;
