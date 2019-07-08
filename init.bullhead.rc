@@ -161,7 +161,7 @@ on boot
     write /sys/bus/msm_subsys/devices/subsys3/restart_level "related"
 
     # Subsytem Ramdump collection
-    write /sys/module/subsystem_restart/parameters/enable_ramdumps 0
+    write /sys/module/subsystem_restart/parameters/enable_ramdumps 1
     write /sys/module/msm_poweroff/parameters/download_mode 0
 
     # Adjust socket buffer to enlarge TCP receive window for high bandwidth
@@ -410,15 +410,6 @@ service atfwd /system/bin/ATFWD-daemon
     class late_start
     user system
     group system radio
-
-on property:ro.debuggable=1
-    start ss_ramdump
-
-service ss_ramdump /system/bin/subsystem_ramdump
-    class main
-    user root
-    group root system
-    disabled
 
 service cnd /system/bin/cnd
     class late_start
