@@ -114,9 +114,16 @@ HAVE_ADRENO_SOURCE:= false
 OVERRIDE_RS_DRIVER:= libRSDriver_adreno.so
 
 # Dexpreopt
-WITH_DEXPREOPT_DEBUG_INFO := false
-USE_DEX2OAT_DEBUG := false
-DONT_DEXPREOPT_PREBUILTS := true
+ifeq ($(HOST_OS),linux)
+    ifneq ($(TARGET_BUILD_VARIANT),eng)
+        ifeq ($(WITH_DEXPREOPT),)
+        WITH_DEXPREOPT_BOOT_IMG_AND_SYSTEM_SERVER_ONLY := false
+        WITH_DEXPREOPT := true
+        WITH_DEXPREOPT_DEBUG_INFO := false
+        USE_DEX2OAT_DEBUG := false
+        endif
+    endif
+endif
 
 TARGET_USERIMAGES_USE_EXT4 := true
 BOARD_BOOTIMAGE_PARTITION_SIZE := 33554432
