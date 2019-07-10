@@ -114,7 +114,7 @@ type sysfs_ksm, fs_type, sysfs_type;
 
 # type for hal_memtrack_default
 type debugfs_mem, fs_type, debugfs_type;
-type debugfs_kgsl_proc, fs_type, debugfs_type;
+type debugfs_kgsl, fs_type, debugfs_type;
 
 # type for netd
 type sysfs_rmnet, fs_type, sysfs_type;
