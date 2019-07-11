@@ -13,8 +13,8 @@ genfscon debugfs /kgsl/proc			 u:object_r:debugfs_kgsl:s0
 genfscon sysfs /block/mmcblk0/queue		 u:object_r:sysfs_mmcblk0_queue:s0
 genfscon sysfs /class/rfkill/rfkill0		 u:object_r:sysfs_rfkill0:s0
 genfscon sysfs /class/kgsl                   u:object_r:sysfs_kgsl:s0
-genfscon sysfs /devices/soc\.0/fdb00000\.qcom,kgsl-3d0/kgsl/kgsl-3d0                   u:object_r:sysfs_kgsl:s0
-genfscon sysfs /devices/soc\.0/fdb00000\.qcom,kgsl-3d0/kgsl/kgsl-3d0/default_pwrlevel  u:object_r:sysfs_thermal:s0
-genfscon sysfs /devices/soc\.0/fdb00000\.qcom,kgsl-3d0/kgsl/kgsl-3d0/max_gpuclk        u:object_r:sysfs_thermal:s0
-genfscon sysfs /devices/soc\.0/fdb00000\.qcom,kgsl-3d0/kgsl/kgsl-3d0/gpuclk            u:object_r:sysfs_thermal:s0
-genfscon sysfs /devices/soc\.0/fdb00000\.qcom,kgsl-3d0/kgsl/kgsl-3d0/reset_count       u:object_r:sysfs_thermal:s0
+genfscon sysfs /devices/soc.0/fdb00000.qcom,kgsl-3d0/kgsl/kgsl-3d0                   u:object_r:sysfs_kgsl:s0
+genfscon sysfs /devices/soc.0/fdb00000.qcom,kgsl-3d0/kgsl/kgsl-3d0/default_pwrlevel  u:object_r:sysfs_thermal:s0
+genfscon sysfs /devices/soc.0/fdb00000.qcom,kgsl-3d0/kgsl/kgsl-3d0/max_gpuclk        u:object_r:sysfs_thermal:s0
+genfscon sysfs /devices/soc.0/fdb00000.qcom,kgsl-3d0/kgsl/kgsl-3d0/gpuclk            u:object_r:sysfs_thermal:s0
+genfscon sysfs /devices/soc.0/fdb00000.qcom,kgsl-3d0/kgsl/kgsl-3d0/reset_count       u:object_r:sysfs_thermal:s0
