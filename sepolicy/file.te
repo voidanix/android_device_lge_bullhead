@@ -88,6 +88,7 @@ type sysfs_audio, sysfs_type, fs_type;
 
 # type for memtrack
 type debugfs_kgsl, fs_type, debugfs_type;
+type sysfs_kgsl, fs_type, sysfs_type;
 
 # type for healthd
 type sysfs_battery, fs_type, sysfs_type;

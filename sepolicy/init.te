@@ -36,3 +36,5 @@ allow init sysfs_mmcblk0_queue:file rw_file_perms;
 # kgsl
 allow init debugfs_kgsl:dir { search read open relabelfrom };
 allow init debugfs_kgsl:file { read write getattr setattr };
+allow init sysfs_kgsl:dir { search read open relabelfrom };
+allow init sysfs_kgsl:file { read write getattr setattr };
