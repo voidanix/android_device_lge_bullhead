@@ -80,7 +80,6 @@ BOARD_USES_SECURE_SERVICES := true
 TARGET_NO_RADIOIMAGE := true
 TARGET_BOARD_PLATFORM := msm8992
 TARGET_BOOTLOADER_BOARD_NAME := bullhead
-TARGET_BOARD_INFO_FILE := device/lge/bullhead/board-info.txt
 TARGET_NO_RPC := true
 
 BOARD_EGL_CFG := device/lge/bullhead/egl.cfg
@@ -143,8 +142,6 @@ BOARD_FLASH_BLOCK_SIZE := 131072
 TARGET_COPY_OUT_VENDOR := vendor
 
 TARGET_RECOVERY_FSTAB = device/lge/bullhead/fstab.bullhead
-
-TARGET_RELEASETOOLS_EXTENSIONS := device/lge/bullhead
 
 BOARD_CHARGER_ENABLE_SUSPEND := true
 
