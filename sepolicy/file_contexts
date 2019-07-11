@@ -145,6 +145,7 @@
 /sys/module/msm_performance(/.*)?                                   u:object_r:sysfs_performance:s0
 /sys/devices/virtual/graphics/fb([0-2])+(/.*)?                      u:object_r:sysfs_graphics:s0
 /sys/devices/virtual/graphics/fb0/color_temp                        u:object_r:sysfs_display:s0
+/sys/devices/virtual/graphics/fb0/rgb                               u:object_r:sysfs_display:s0
 /sys/devices/msm_hsic_host/host_ready                               u:object_r:sysfs_hsic_host_rdy:s0
 /sys/bus/msm_subsys(/.*)?                                           u:object_r:sysfs_ssr:s0
 /sys/bus/msm_subsys/devices/subsys0/restart_level                   u:object_r:sysfs_ssr_toggle:s0
