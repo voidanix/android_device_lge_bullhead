@@ -29,9 +29,6 @@
 -priv-app/DiagMon/DiagMon.apk
 -priv-app/DMConfigUpdate/DMConfigUpdate.apk
 -priv-app/DMService/DMService.apk
--priv-app/HotwordEnrollmentOKGoogleWCD9330/HotwordEnrollmentOKGoogleWCD9330.apk;PRESIGNED
--priv-app/HotwordEnrollmentTGoogleWCD9330/HotwordEnrollmentTGoogleWCD9330.apk;PRESIGNED
--priv-app/HotwordEnrollmentXGoogleWCD9330/HotwordEnrollmentXGoogleWCD9330.apk;PRESIGNED
 -priv-app/LifeTimerService/LifeTimerService.apk
 -priv-app/SprintDM/SprintDM.apk
 -priv-app/qcrilmsgtunnel/qcrilmsgtunnel.apk
@@ -78,7 +75,6 @@ etc/permissions/cneapiclient.xml
 etc/permissions/com.android.omadm.service.xml
 etc/permissions/com.android.sdm.plugins.connmo.xml
 etc/permissions/com.android.sdm.plugins.sprintdm.xml
-etc/permissions/com.google.android.camera.experimental2016.xml
 etc/permissions/privapp-permissions-bullhead.xml
 etc/permissions/qcrilhook.xml
 etc/permissions/qti_permissions.xml
@@ -89,7 +85,6 @@ etc/sysconfig/bullhead_common.xml
 etc/sysconfig/whitelist_com.android.omadm.service.xml
 etc/thermal-engine-8992.conf
 -framework/cneapiclient.jar;PRESIGNED
--framework/com.google.android.camera.experimental2016.jar;PRESIGNED
 -framework/qcrilhook.jar;PRESIGNED
 -framework/rcsimssettings.jar;PRESIGNED
 -framework/rcsservice.jar;PRESIGNED
