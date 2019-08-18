@@ -340,6 +340,10 @@ vendor/firmware/venus.b04
 vendor/firmware/venus.mbn
 vendor/firmware/venus.mdt
 
+# NFC
+#vendor/lib/hw/nfc_nci.bullhead.so
+#vendor/lib64/hw/nfc_nci.bullhead.so
+
 # NFC Firmware
 vendor/firmware/libpn548ad_fw.so
 
