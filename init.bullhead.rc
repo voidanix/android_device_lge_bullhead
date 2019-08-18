@@ -411,6 +411,12 @@ service atfwd /system/bin/ATFWD-daemon
     user system
     group system radio
 
+service ss_ramdump /system/bin/subsystem_ramdump
+    class main
+    user root
+    group root system
+    disabled
+
 service cnd /system/bin/cnd
     class late_start
     socket cnd stream 660 root inet
