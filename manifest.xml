@@ -111,11 +111,10 @@
             <instance>default</instance>
         </interface>
     </hal>
-<<<<<<< HEAD
     <hal format="hidl">
         <name>android.hardware.power</name>
-        <transport>hwbinder</transport>
-        <version>1.1</version>
+        <transport arch="32+64">passthrough</transport>
+        <version>1.0</version>
         <interface>
             <name>IPower</name>
             <instance>default</instance>
@@ -166,6 +165,4 @@
             <instance>legacy/0</instance>
         </interface>
     </hal>
-=======
->>>>>>> parent of 221fb08... bullhead: use binderized power HAL
 </manifest>
