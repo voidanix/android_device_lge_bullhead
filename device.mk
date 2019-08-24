@@ -324,6 +324,9 @@ PRODUCT_PACKAGES += \
     keystore.msm8992 \
     gatekeeper.msm8992
 
+PRODUCT_PACKAGES += \
+    libtinyxml
+
 # For android_filesystem_config.h
 PRODUCT_PACKAGES += \
    fs_config_files
