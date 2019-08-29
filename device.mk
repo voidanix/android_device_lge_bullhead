@@ -528,8 +528,7 @@ PRODUCT_PACKAGES += \
 
 # Health HAL
 PRODUCT_PACKAGES += \
-    android.hardware.health@2.0-impl \
-    android.hardware.health@2.0-service
+    android.hardware.health@2.0-service.bullhead
 
 # Vendor Patch Level
 PRODUCT_PROPERTY_OVERRIDES += \
