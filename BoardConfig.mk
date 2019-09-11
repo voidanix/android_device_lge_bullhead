@@ -160,7 +160,10 @@ TARGET_USES_64_BIT_BINDER := true
 TARGET_USES_AOSP := true
 TARGET_USES_INTERACTION_BOOST := true
 
+# Recovery
 TARGET_RECOVERY_UI_LIB := librecovery_ui_nanohub
+TARGET_RECOVERY_FSTAB = device/lge/bullhead/fstab.bullhead
+LZMA_RAMDISK_TARGETS := recovery
 
 # Force camera module to be compiled only in 32-bit mode on 64-bit systems
 # Once camera module can run in the native mode of the system (either
