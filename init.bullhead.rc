@@ -59,8 +59,14 @@ on property:sys.boot_completed=1
     write /sys/block/dm-1/queue/read_ahead_kb 128
     write /sys/block/dm-2/queue/read_ahead_kb 128
     write /sys/block/mmcblk0/queue/iostats 1
+	swapon_all ./fstab.bullhead
 
 on init
+    start servicemanager
+	start hwservicemanager
+	start vndservicemanager
+    start qseecomd
+
     # Load persistent dm-verity state
     #verity_load_state
 
@@ -80,12 +86,25 @@ on fs
     wait /dev/block/platform/soc.0/f9824900.sdhci
     symlink /dev/block/platform/soc.0/f9824900.sdhci /dev/block/bootdevice
 
-    mount_all ./fstab.bullhead
-    swapon_all ./fstab.bullhead
-
+    mount_all ./fstab.bullhead --early
     setprop sys.usb.ffs.aio_compat 1
 
     restorecon_recursive /persist
+
+on late-fs
+    # Start services for bootanim
+    start surfaceflinger
+    start bootanim
+
+    start vendor.configstore-hal
+    start vendor.gralloc-2-0
+
+    # Wait for hwservicemanager ready since fsck might be triggered in mount_all --late
+    # In such case, init won't responce the property_set from hwservicemanager and then
+    # cause services for bootanim not running.
+    wait_for_prop hwservicemanager.ready true
+    # Mount RW partitions which need run fsck
+    mount_all ./fstab.bullhead --late
 
 on early-boot
     # Set RLIMIT_MEMLOCK to 64MB
@@ -197,7 +216,6 @@ on post-fs
     mkdir /persist/data/app_g 0700 system system
     mkdir /persist/widevine 0770 drm system
 
-    start qseecomd
     # Busy loop to wait for qseecomd started
     exec - root root system -- /system/bin/init.bullhead.qseecomd.sh
     # Start devices by sysfs trigger
