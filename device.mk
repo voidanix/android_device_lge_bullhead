@@ -23,22 +23,22 @@
 TARGET_USES_CHINOOK_SENSORHUB := false
 
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/init.bullhead.rc:root/init.bullhead.rc \
-    $(LOCAL_PATH)/init.bullhead.usb.rc:root/init.bullhead.usb.rc \
-    $(LOCAL_PATH)/fstab.bullhead:root/fstab.bullhead \
-    $(LOCAL_PATH)/ueventd.bullhead.rc:root/ueventd.bullhead.rc \
-    $(LOCAL_PATH)/init.recovery.bullhead.rc:root/init.recovery.bullhead.rc \
-    $(LOCAL_PATH)/init.bullhead.ramdump.rc:root/init.bullhead.ramdump.rc \
-    $(LOCAL_PATH)/init.bullhead.fp.rc:root/init.bullhead.fp.rc \
-    $(LOCAL_PATH)/init.qcom.devwait.sh:system/bin/init.qcom.devwait.sh \
-    $(LOCAL_PATH)/init.qcom.devstart.sh:system/bin/init.qcom.devstart.sh
+    $(LOCAL_PATH)/init.bullhead.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/hw/init.bullhead.rc \
+    $(LOCAL_PATH)/init.bullhead.usb.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/hw/init.bullhead.usb.rc \
+    $(LOCAL_PATH)/fstab.bullhead:$(TARGET_COPY_OUT_VENDOR)/etc/fstab.bullhead \
+    $(LOCAL_PATH)/ueventd.bullhead.rc:$(TARGET_COPY_OUT_VENDOR)/ueventd.rc \
+    $(LOCAL_PATH)/init.recovery.bullhead.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/hw/init.recovery.bullhead.rc \
+    $(LOCAL_PATH)/init.bullhead.ramdump.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/hw/init.bullhead.ramdump.rc \
+    $(LOCAL_PATH)/init.bullhead.fp.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/hw/init.bullhead.fp.rc \
+    $(LOCAL_PATH)/init.qcom.devwait.sh:$(TARGET_COPY_OUT_VENDOR)/bin/init.qcom.devwait.sh \
+    $(LOCAL_PATH)/init.qcom.devstart.sh:$(TARGET_COPY_OUT_VENDOR)/bin/init.qcom.devstart.sh
 
 ifeq ($(TARGET_USES_CHINOOK_SENSORHUB),true)
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/init.bullhead.sensorhub.rc:root/init.bullhead.sensorhub.rc
+    $(LOCAL_PATH)/init.bullhead.sensorhub.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/hw/init.bullhead.sensorhub.rc
 else
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/init.bullhead.nanohub.rc:root/init.bullhead.sensorhub.rc
+    $(LOCAL_PATH)/init.bullhead.nanohub.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/hw/init.bullhead.sensorhub.rc
 endif
 
 PRODUCT_COPY_FILES += \
@@ -52,7 +52,7 @@ PRODUCT_COPY_FILES += \
 # Audio
 USE_XML_AUDIO_POLICY_CONF := 1
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/audio_effects.conf:vendor/etc/audio_effects.conf \
+    $(LOCAL_PATH)/audio_effects.conf:$(TARGET_COPY_OUT_VENDOR)/etc/audio_effects.conf \
     $(LOCAL_PATH)/mixer_paths.xml:system/etc/mixer_paths.xml \
     $(LOCAL_PATH)/audio_platform_info.xml:system/etc/audio_platform_info.xml \
     $(LOCAL_PATH)/audio_policy_configuration.xml:system/etc/audio_policy_configuration.xml \
