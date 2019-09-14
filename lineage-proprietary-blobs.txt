@@ -44,7 +44,7 @@ bin/loc_launcher
 bin/location-mq
 bin/lowi-server
 bin/msm_irqbalance
-bin/netmgrd
+bin/netmgrd:vendor/bin/netmgrd
 bin/nl_listener
 bin/perfd
 bin/pm-proxy
