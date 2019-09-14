@@ -23,7 +23,11 @@ import init.bullhead.misc.rc
 
 on early-init
     mount debugfs debugfs /sys/kernel/debug
+	chmod 0755 /sys/kernel/debug
     chown system system /sys/kernel/debug/kgsl/proc
+
+on early-init && property:ro.boot.mode=charger
+    setprop vendor.skip.init 1
 
 on charger
     # Disable FPS clk
@@ -47,6 +51,9 @@ on charger
     # Disable L2 retention
     write /sys/module/lpm_levels/system/a53/a53-l2-retention/idle_enabled 0
     write /sys/module/lpm_levels/system/a57/a57-l2-retention/idle_enabled 0
+
+on early-fs
+    start vold
 
 on property:sys.boot_completed=1
     # Allow CPUs to go in deeper idle state than C0
@@ -72,10 +79,6 @@ on init && property:vendor.skip.init=0
     # Load persistent dm-verity state
     #verity_load_state
 
-    # Set permissions for persist partition
-    mkdir /persist 0771 system system
-    mkdir /firmware 0771 system system
-
     # NXP HAL expects /dev/pn54x
     symlink /dev/pn548 /dev/pn54x
 
@@ -86,12 +89,14 @@ on init && property:vendor.skip.init=0
 
 on fs
 	start hwservicemanager
-
     mount_all ./fstab.bullhead --early
 
     setprop sys.usb.ffs.aio_compat 1
     setprop persist.adb.nonblocking_ffs 0
     setprop ro.adb.nonblocking_ffs 0
+
+    mkdir /persist 0771 system system
+    mkdir /firmware 0771 system system
 
     restorecon_recursive /persist
 
@@ -99,7 +104,6 @@ on late-fs
     # Start services for bootanim
     start surfaceflinger
     start bootanim
-
     start vendor.configstore-hal
     start vendor.gralloc-2-0
 
@@ -109,6 +113,8 @@ on late-fs
     wait_for_prop hwservicemanager.ready true
     # Mount RW partitions which need run fsck
     mount_all ./fstab.bullhead --late
+
+	start time_daemon
 
 on early-boot
     # Set RLIMIT_MEMLOCK to 64MB
@@ -172,6 +178,13 @@ on boot
     # Allow QMUX daemon to assign port open wait time
     chown radio radio /sys/devices/virtual/hsicctl/hsicctl0/modem_wait
 
+    chown system system /sys/class/leds/red/on_off_ms
+    chown system system /sys/class/leds/green/on_off_ms
+    chown system system /sys/class/leds/blue/on_off_ms
+    chown system system /sys/class/leds/red/rgb_start
+    chown system system /sys/class/leds/green/rgb_start
+    chown system system /sys/class/leds/blue/rgb_start
+
     # Create QMUX deamon socket area
     mkdir /dev/socket/qmux_radio 0770 radio radio
     chmod 2770 /dev/socket/qmux_radio
@@ -205,13 +218,7 @@ on boot
     chown system system /sys/class/leds/red/brightness
     chown system system /sys/class/leds/green/brightness
     chown system system /sys/class/leds/blue/brightness
-    chown system system /sys/class/leds/red/on_off_ms
-    chown system system /sys/class/leds/green/on_off_ms
-    chown system system /sys/class/leds/blue/on_off_ms
-    chown system system /sys/class/leds/red/rgb_start
-    chown system system /sys/class/leds/green/rgb_start
-    chown system system /sys/class/leds/blue/rgb_start
-    chmod 0664 /sys/class/leds/lcd-backlight/brightness
+   chmod 0664 /sys/class/leds/lcd-backlight/brightness
     chmod 0664 /sys/class/leds/red/brightness
     chmod 0664 /sys/class/leds/green/brightness
     chmod 0664 /sys/class/leds/blue/brightness
@@ -434,7 +441,7 @@ service time_daemon /system/bin/time_daemon
     user root
     group root
 
-service charger /charger
+service vendor.charger /charger
     class charger
     critical
     seclabel u:r:charger:s0
