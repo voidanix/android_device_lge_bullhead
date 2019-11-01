@@ -103,6 +103,8 @@ type sysfs_mmcblk0, fs_type, sysfs_type;
 type sysfs_backlight, fs_type, sysfs_type;
 type sysfs_qpnp_25, fs_type, sysfs_type;
 
+type netmgrd_socket, file_type;
+
 # type for init
 type sysfs_g_android_param, fs_type, sysfs_type;
 type sysfs_lge_handle_panic_param, fs_type, sysfs_type;

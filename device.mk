@@ -91,7 +91,7 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.camera.full.xml:system/etc/permissions/android.hardware.camera.full.xml \
     frameworks/native/data/etc/android.hardware.camera.raw.xml:system/etc/permissions/android.hardware.camera.raw.xml \
     frameworks/native/data/etc/android.hardware.fingerprint.xml:system/etc/permissions/android.hardware.fingerprint.xml \
-    frameworks/native/data/etc/android.hardware.location.gps.xml:system/etc/permissions/android.hardware.location.gps.xml \
+    frameworks/native/data/etc/android.hardware.location.gps.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.location.gps.xml \
     frameworks/native/data/etc/android.hardware.wifi.xml:system/etc/permissions/android.hardware.wifi.xml \
     frameworks/native/data/etc/android.hardware.wifi.direct.xml:system/etc/permissions/android.hardware.wifi.direct.xml \
     frameworks/native/data/etc/android.hardware.wifi.passpoint.xml:system/etc/permissions/android.hardware.wifi.passpoint.xml \
@@ -123,7 +123,7 @@ PRODUCT_COPY_FILES += \
 
 # For GPS
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/sec_config:system/etc/sec_config
+    $(LOCAL_PATH)/sec_config:$(TARGET_COPY_OUT_VENDOR)/etc/sec_config
 
 # NFC config files
 PRODUCT_COPY_FILES += \
@@ -233,7 +233,7 @@ PRODUCT_PACKAGES += \
 
 # GPS configuration
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/gps.conf:system/etc/gps.conf
+    $(LOCAL_PATH)/gps.conf:$(TARGET_COPY_OUT_VENDOR)/etc/gps.conf
 	
 # GPS
 PRODUCT_PACKAGES += \
@@ -284,6 +284,9 @@ PRODUCT_PACKAGES += \
 # Snap Config
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.camera.cpp.duplication=false
+
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/configs/external_camera_config.xml:$(TARGET_COPY_OUT_VENDOR)/etc/external_camera_config.xml
 
 # Sensor & activity_recognition HAL
 TARGET_USES_NANOHUB_SENSORHAL := true
@@ -514,13 +517,17 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PACKAGES += \
 	android.hardware.power@1.1-service.bullhead
 
+# Thermal HAL
+PRODUCT_PACKAGES += \
+    thermal.bullhead
+
 # Trust
 PRODUCT_PACKAGES += \
     vendor.lineage.trust@1.0-service
 
 # GNSS HAL
 PRODUCT_PACKAGES += \
-    android.hardware.gnss@1.0-impl \
+	android.hardware.gnss@1.0-impl:64 \
 	android.hardware.gnss@1.0-service
 
 # USB HAL
@@ -575,6 +582,13 @@ PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
 # Disable rescue party
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.sys.disable_rescue=true
+
+PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
+    ro.surface_flinger.force_hwc_copy_for_virtual_displays=true \
+    ro.surface_flinger.max_frame_buffer_acquired_buffers=3 \
+    ro.surface_flinger.max_virtual_display_dimension=2048 \
+    ro.surface_flinger.vsync_event_phase_offset_ns=2000000 \
+    ro.surface_flinger.vsync_sf_event_phase_offset_ns=6000000
 
 # ro.product.first_api_level indicates the first api level the device has commercially launched on
 PRODUCT_PROPERTY_OVERRIDES += \
