@@ -65,6 +65,7 @@ BOARD_HAVE_BLUETOOTH_QCOM := true
 BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := device/lge/bullhead/bluetooth
 BOARD_HAS_QCA_BT_ROME := true
 WCNSS_FILTER_USES_SIBS := true
+BOARD_CUSTOM_BT_CONFIG := device/lge/bullhead/bluetooth/vnd_bullhead.txt
 
 BOARD_HAS_QCOM_WLAN := true
 BOARD_WLAN_DEVICE := qcwcn
