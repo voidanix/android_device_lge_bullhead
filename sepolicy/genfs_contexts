@@ -32,7 +32,6 @@ genfscon sysfs /devices/soc.0/qpnp-smbcharger-17/power_supply/battery    u:objec
 genfscon sysfs /module/g_android/parameters                              u:object_r:sysfs_g_android_param:s0
 genfscon sysfs /module/lge_handle_panic/parameters                       u:object_r:sysfs_lge_handle_panic_param:s0
 genfscon sysfs /kernel/mm/ksm                                            u:object_r:sysfs_ksm:s0
-genfscon sysfs /devices/virtual/net                                      u:object_r:sysfs_rmnet:s0
 genfscon sysfs /devices/pci0000:00/0000:00:00.0/0000:01:00.0/net/wlan0   u:object_r:sysfs_wlan0:s0
 
 # debugfs
