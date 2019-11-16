@@ -343,7 +343,7 @@ on property:wc_transport.start_hci=false
     stop start_hci_filter
 
 # QMUX must be in multiple groups to support external process connections
-service qmuxd /system/bin/qmuxd
+service qmuxd /vendor/bin/qmuxd
     class main
     user radio
     group radio audio bluetooth wakelock gps
@@ -416,7 +416,7 @@ service wpa_supplicant /vendor/bin/hw/wpa_supplicant \
     disabled
     oneshot
 
-service loc_launcher /system/bin/loc_launcher
+service loc_launcher /vendor/bin/loc_launcher
     # loc_launcher will start as gps
     class late_start
 	user gps

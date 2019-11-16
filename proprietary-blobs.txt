@@ -26,11 +26,11 @@
 /system/bin/imsqmidaemon
 /system/bin/ims_rtp_daemon
 /system/bin/irsc_util
-/system/bin/location-mq
-/system/bin/loc_launcher
-/system/bin/lowi-server
+/vendor/bin/location-mq
+/vendor/bin/loc_launcher
+/vendor/bin/lowi-server
 /system/bin/msm_irqbalance
-/system/bin/netmgrd
+/vendor/bin/netmgrd
 /system/bin/nl_listener
 /system/bin/perfd
 /system/bin/pktlogconf
@@ -55,7 +55,7 @@
 /system/bin/qmi-framework-tests/qmi_test_service_clnt_test_2000
 /system/bin/qmi-framework-tests/qmi_test_service_test
 /system/bin/qmi_simple_ril_test
-/system/bin/qmuxd
+/vendor/bin/qmuxd
 /system/bin/radish
 /system/bin/rmt_storage
 /system/bin/subsystem_ramdump
