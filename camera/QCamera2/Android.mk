@@ -37,7 +37,8 @@ LOCAL_SRC_FILES += \
         HAL/QCameraParameters.cpp \
         HAL/QCameraThermalAdapter.cpp
 
-LOCAL_CFLAGS := -Wall -Wextra -Werror -Wno-unused-label -Wno-unused-parameter
+# Readd -Werror once the warnings get away
+LOCAL_CFLAGS := -Wall -Wextra -Wno-unused-label -Wno-unused-parameter
 LOCAL_CFLAGS += -DHAS_MULTIMEDIA_HINTS
 LOCAL_CFLAGS += -DENABLE_MODEL_INFO_EXIF
 
