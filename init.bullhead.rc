@@ -142,12 +142,12 @@ on early-boot
     #verity_update_state
 
     # Busy loop to wait for devices booted by devstart_sh just in case device not ready
-    exec - root root system -- /system/bin/init.qcom.devwait.sh
+    exec - root root system -- /vendor/bin/init.qcom.devwait.sh
 
 on boot
     # Execute script to set initial CPU settings
     # Don't run as a service to avoid race conditions
-    exec - root root system -- /system/bin/init.bullhead.power.sh
+    exec - root root system -- /vendor/bin/init.bullhead.power.sh
 
     # Update foreground cpuset now that processors are up
     # Foreground gets all CPUs except CPU 3
@@ -233,7 +233,7 @@ on post-fs
     mkdir /persist/widevine 0770 drm system
 
     # Busy loop to wait for qseecomd started
-    exec - root root system -- /system/bin/init.bullhead.qseecomd.sh
+    exec - root root system -- /vendor/bin/init.bullhead.qseecomd.sh
     # Start devices by sysfs trigger
     start devstart_sh
 
@@ -319,7 +319,7 @@ on post-fs-data
 
     setprop vold.post_fs_data_done 1
 
-service irsc_util /system/bin/irsc_util "/etc/sec_config"
+service irsc_util /system/bin/irsc_util "/vendor/etc/sec_config"
     class core
     user root
     oneshot
@@ -488,7 +488,7 @@ service imsdatadaemon /system/bin/imsdatadaemon
 on property:sys.ims.QMI_DAEMON_STATUS=1
     start imsdatadaemon
 
-service bullhead-sh /system/bin/init.bullhead.sh
+service bullhead-sh /vendor/bin/init.bullhead.sh
     class late_start
     user radio
     group system
@@ -502,7 +502,7 @@ service bugreport /system/bin/dumpstate -d -p -B -z \
     oneshot
     keycodes 114 115 116
 
-service devstart_sh /system/bin/init.qcom.devstart.sh
+service devstart_sh /vendor/bin/init.qcom.devstart.sh
     class main
     user root
     group root system

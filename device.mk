@@ -139,15 +139,15 @@ PRODUCT_COPY_FILES += \
 
 # Power configuration file
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/init.bullhead.power.sh:system/bin/init.bullhead.power.sh
+    $(LOCAL_PATH)/init.bullhead.power.sh:$(TARGET_COPY_OUT_VENDOR)/bin/init.bullhead.power.sh
 
 # MBN
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/init.bullhead.sh:system/bin/init.bullhead.sh
+    $(LOCAL_PATH)/init.bullhead.sh:$(TARGET_COPY_OUT_VENDOR)/bin/init.bullhead.sh
 
 # Qseecomd configuration file
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/init.bullhead.qseecomd.sh:system/bin/init.bullhead.qseecomd.sh
+    $(LOCAL_PATH)/init.bullhead.qseecomd.sh:$(TARGET_COPY_OUT_VENDOR)/bin/init.bullhead.qseecomd.sh
 
 PRODUCT_TAGS += dalvik.gc.type-precise
 
