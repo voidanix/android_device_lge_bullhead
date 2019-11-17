@@ -32,13 +32,14 @@ TARGET_2ND_CPU_VARIANT := generic
 TARGET_2ND_CPU_VARIANT_RUNTIME := cortex-a53.a57
 
 TARGET_NO_BOOTLOADER := true
+
 FIRMWARE_MOUNT_POINT := $(TARGET_OUT_VENDOR)/firmware_mnt
 ALL_DEFAULT_INSTALLED_MODULES += $(FIRMWARE_MOUNT_POINT)
 BOARD_ROOT_EXTRA_SYMLINKS += /vendor/firmware_mnt:/firmware
 
 $(FIRMWARE_MOUNT_POINT):
-    @echo "Creating $(FIRMWARE_MOUNT_POINT)"
-    @mkdir -p $(TARGET_OUT_VENDOR)/firmware_mnt
+	@echo "Creating $(FIRMWARE_MOUNT_POINT)"
+	@mkdir -p $(TARGET_OUT_VENDOR)/firmware_mnt
 
 # Inline kernel
 BOARD_KERNEL_IMAGE_NAME := Image.gz-dtb
@@ -168,10 +169,6 @@ TARGET_USES_64_BIT_BINDER := true
 
 TARGET_USES_AOSP := true
 TARGET_USES_INTERACTION_BOOST := true
-
-# RRO
-PRODUCT_ENFORCE_RRO_TARGETS := *
-PRODUCT_ENFORCE_RRO_EXCLUDED_OVERLAYS += $(LOCAL_PATH)/overlay/lineage-sdk
 
 # Recovery
 TARGET_RECOVERY_UI_LIB := librecovery_ui_nanohub

@@ -82,6 +82,10 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/uinput-fpc.idc:system/usr/idc/uinput-fpc.idc \
     $(LOCAL_PATH)/uinput-fpc.kl:system/usr/keylayout/uinput-fpc.kl
 
+# RRO
+PRODUCT_ENFORCE_RRO_TARGETS := *
+PRODUCT_ENFORCE_RRO_EXCLUDED_OVERLAYS += $(LOCAL_PATH)/overlay/lineage-sdk
+
 # Prebuilt input device calibration files
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/synaptics_rmi4_i2c.idc:system/usr/idc/synaptics_rmi4_i2c.idc
