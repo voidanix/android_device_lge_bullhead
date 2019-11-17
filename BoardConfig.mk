@@ -21,13 +21,15 @@ TARGET_ARCH := arm64
 TARGET_ARCH_VARIANT := armv8-a
 TARGET_CPU_ABI := arm64-v8a
 TARGET_CPU_ABI2 :=
-TARGET_CPU_VARIANT := cortex-a53
+TARGET_CPU_VARIANT := generic
+TARGET_CPU_VARIANT_RUNTIME := cortex-a53
 
 TARGET_2ND_ARCH := arm
 TARGET_2ND_ARCH_VARIANT := armv8-a
 TARGET_2ND_CPU_ABI := armeabi-v7a
 TARGET_2ND_CPU_ABI2 := armeabi
-TARGET_2ND_CPU_VARIANT := cortex-a53.a57
+TARGET_2ND_CPU_VARIANT := generic
+TARGET_2ND_CPU_VARIANT_RUNTIME := cortex-a53.a57
 
 TARGET_NO_BOOTLOADER := true
 
@@ -105,7 +107,7 @@ TARGET_USES_ION := true
 TARGET_USES_C2D_COMPOSITION := true
 TARGET_USES_GRALLOC1_ADAPTER := true
 TARGET_USES_HWC2 := true
-TARGET_ADDITIONAL_GRALLOC_10_USAGE_BITS := 0x02000000U
+TARGET_ADDITIONAL_GRALLOC_10_USAGE_BITS := 0x2000U | 0x02000000U
 
 TARGET_AUX_OS_VARIANT_LIST := bullhead
 
@@ -160,6 +162,10 @@ TARGET_USES_64_BIT_BINDER := true
 TARGET_USES_AOSP := true
 TARGET_USES_INTERACTION_BOOST := true
 
+# RRO
+PRODUCT_ENFORCE_RRO_TARGETS := *
+PRODUCT_ENFORCE_RRO_EXCLUDED_OVERLAYS += $(LOCAL_PATH)/overlay/lineage-sdk
+
 # Recovery
 TARGET_RECOVERY_UI_LIB := librecovery_ui_nanohub
 TARGET_RECOVERY_FSTAB = device/lge/bullhead/fstab.bullhead
@@ -180,7 +186,7 @@ TARGET_FS_CONFIG_GEN += device/lge/bullhead/config.fs
 # Testing related defines
 BOARD_PERFSETUP_SCRIPT := platform_testing/scripts/perf-setup/bullhead-setup.sh
 
-# Manifests
+# Vendor interface manifests
 DEVICE_MANIFEST_FILE := device/lge/bullhead/manifest.xml
 DEVICE_MATRIX_FILE := device/lge/bullhead/compatibility_matrix.xml
 

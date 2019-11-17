@@ -38,3 +38,6 @@ allow init debugfs_kgsl:dir { search read open relabelfrom };
 allow init debugfs_kgsl:file { read write getattr setattr };
 allow init sysfs_kgsl:dir { search read open relabelfrom };
 allow init sysfs_kgsl:file { read write getattr setattr };
+
+# Allow init to bind mount loader config for media swcodec
+allow init system_file:file mounton;

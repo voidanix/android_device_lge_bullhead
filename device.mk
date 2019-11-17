@@ -22,6 +22,9 @@
 # Enable support for chinook sensorhub
 TARGET_USES_CHINOOK_SENSORHUB := false
 
+# Soong
+PRODUCT_SOONG_NAMESPACES += $(LOCAL_PATH)
+
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/init.bullhead.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/hw/init.bullhead.rc \
     $(LOCAL_PATH)/init.bullhead.usb.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/hw/init.bullhead.usb.rc \
@@ -166,7 +169,7 @@ PRODUCT_PACKAGES += \
     gralloc.msm8992 \
     android.hardware.graphics.allocator@2.0-impl \
     android.hardware.graphics.allocator@2.0-service \
-    android.hardware.graphics.mapper@2.0-impl \
+    android.hardware.graphics.mapper@2.0-impl-2.1 \
     android.hardware.graphics.mapper@2.0-service \
     hwcomposer.msm8992 \
     libgenlock \
@@ -244,6 +247,7 @@ PRODUCT_PACKAGES += \
     libnfc-nci \
     NfcNci \
     Tag \
+    SecureElement \
     android.hardware.nfc@1.1-service
 
 # Keymaster HAL
@@ -387,6 +391,9 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.hwc.mdpcomp.enable=true
+
+PRODUCT_PROPERTY_OVERRIDES += \
+	debug.sf.enable_gl_backpressure=1 \
 
 # Enable low power video mode for 4K encode
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -590,9 +597,8 @@ PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
     ro.surface_flinger.vsync_event_phase_offset_ns=2000000 \
     ro.surface_flinger.vsync_sf_event_phase_offset_ns=6000000
 
-# ro.product.first_api_level indicates the first api level the device has commercially launched on
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.product.first_api_level=23
+# Shipping API
+$(call inherit-product, $(SRC_TARGET_DIR)/product/product_launched_with_m.mk)
 
 # Setup Dalvik VM configs
 $(call inherit-product, frameworks/native/build/phone-xhdpi-2048-dalvik-heap.mk)

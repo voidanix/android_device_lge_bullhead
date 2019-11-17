@@ -25,9 +25,7 @@ LOCAL_SHARED_LIBRARIES := \
     libdl \
     libxml2 \
     libhidlbase \
-    libhidltransport \
     libhardware \
-    libhwbinder \
     libutils
 
 LOCAL_SRC_FILES := \
