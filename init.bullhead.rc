@@ -79,7 +79,6 @@ on init
 
     # Set permissions for persist partition
     mkdir /persist 0771 system system
-    mkdir /firmware 0771 system system
 
     # NXP HAL expects /dev/pn54x
     symlink /dev/pn548 /dev/pn54x

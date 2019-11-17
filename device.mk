@@ -29,6 +29,7 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/init.bullhead.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/hw/init.bullhead.rc \
     $(LOCAL_PATH)/init.bullhead.usb.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/hw/init.bullhead.usb.rc \
     $(LOCAL_PATH)/fstab.bullhead:$(TARGET_COPY_OUT_VENDOR)/etc/fstab.bullhead \
+    $(LOCAL_PATH)/fstab.bullhead:$(TARGET_COPY_OUT_RAMDISK)/fstab.bullhead \
     $(LOCAL_PATH)/ueventd.bullhead.rc:$(TARGET_COPY_OUT_VENDOR)/ueventd.rc \
     $(LOCAL_PATH)/init.recovery.bullhead.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/hw/init.recovery.bullhead.rc \
     $(LOCAL_PATH)/init.bullhead.ramdump.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/hw/init.bullhead.ramdump.rc \
