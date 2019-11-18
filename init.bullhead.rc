@@ -77,9 +77,6 @@ on init
     # Load persistent dm-verity state
     #verity_load_state
 
-    # Set permissions for persist partition
-    mkdir /persist 0771 system system
-
     # NXP HAL expects /dev/pn54x
     symlink /dev/pn548 /dev/pn54x
 
