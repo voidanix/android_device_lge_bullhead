@@ -10,7 +10,9 @@ type sysfs_surfaceflinger, fs_type, sysfs_type;
 type msm_irqbalance_socket, file_type;
 
 # Default type for anything under /vendor/firmware_mnt
-type firmware_file, fs_type, contextmount_type;
+#type firmware_file, fs_type, contextmount_type; this one should be deprecated in favor of the following:
+type firmware_file, file_type, contextmount_type, vendor_file_type;
+type vendor_firmware_file, vendor_file_type, file_type;
 type fsg_file, fs_type, contextmount_type;
 
 type cnd_socket, file_type;
@@ -126,3 +128,6 @@ type sysfs_block, fs_type, sysfs_type;
 type sysfs_rfkill0, fs_type, sysfs_type;
 type sysfs_subsys1, fs_type, sysfs_type;
 type sysfs_mmcblk0_queue, fs_type, sysfs_type;
+
+# firmware additions for pixelism
+allow firmware_file self:filesystem associate;
