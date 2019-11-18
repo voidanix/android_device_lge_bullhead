@@ -1,6 +1,6 @@
 # Policies for time daemon
-type time_daemon, domain, coredomain;
-type time_daemon_exec, exec_type, file_type, system_file_type;
+type time_daemon, domain;
+type time_daemon_exec, exec_type, file_type, vendor_file_type;
 
 # Make transition to its own time_daemon domain from init
 init_daemon_domain(time_daemon)
