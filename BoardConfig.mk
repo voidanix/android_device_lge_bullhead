@@ -33,13 +33,8 @@ TARGET_2ND_CPU_VARIANT_RUNTIME := cortex-a53.a57
 
 TARGET_NO_BOOTLOADER := true
 
-FIRMWARE_MOUNT_POINT := /vendor/firmware_mnt
-ALL_DEFAULT_INSTALLED_MODULES += $(FIRMWARE_MOUNT_POINT)
+BOARD_ROOT_EXTRA_FOLDERS := persist
 BOARD_ROOT_EXTRA_SYMLINKS += /vendor/firmware_mnt:/firmware
-
-$(FIRMWARE_MOUNT_POINT):
-	@echo "Creating $(FIRMWARE_MOUNT_POINT)"
-	@mkdir -p $(TARGET_OUT_VENDOR)/firmware_mnt
 
 # Inline kernel
 BOARD_KERNEL_IMAGE_NAME := Image.gz-dtb

@@ -36,6 +36,13 @@ ifneq ($(filter bullhead, $(TARGET_DEVICE)),)
 
 include $(call all-makefiles-under,$(LOCAL_PATH))
 
+FIRMWARE_MOUNT_POINT := /vendor/firmware_mnt
+ALL_DEFAULT_INSTALLED_MODULES += $(FIRMWARE_MOUNT_POINT)
+
+$(FIRMWARE_MOUNT_POINT):
+	@echo "Creating $(FIRMWARE_MOUNT_POINT)"
+	@mkdir -p $(TARGET_OUT_VENDOR)/firmware_mnt
+
 DM_LIBS := libdmengine.so libdmjavaplugin.so
 DM_SYMLINKS := $(addprefix $(TARGET_OUT)/priv-app/DMService/lib/arm/,$(notdir $(DM_LIBS)))
 $(DM_SYMLINKS): $(LOCAL_INSTALLED_MODULE)
