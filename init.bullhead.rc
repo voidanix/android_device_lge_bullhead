@@ -312,12 +312,12 @@ on post-fs-data
 
     setprop vold.post_fs_data_done 1
 
-service irsc_util /system/bin/irsc_util "/vendor/etc/sec_config"
+service irsc_util /vendor/bin/irsc_util "/vendor/etc/sec_config"
     class core
     user root
     oneshot
 
-service rmt_storage /system/bin/rmt_storage
+service rmt_storage /vendor/bin/rmt_storage
     class core
     user root
     group system wakelock
@@ -341,7 +341,7 @@ service qmuxd /vendor/bin/qmuxd
     user radio
     group radio audio bluetooth wakelock gps
 
-service perfd /system/bin/perfd
+service perfd /vendor/bin/perfd
     class main
     user root
     group system
@@ -356,12 +356,12 @@ service netmgrd /vendor/bin/netmgrd
     class main
     group radio system wakelock
 
-service per_mgr /system/bin/pm-service
+service per_mgr /vendor/bin/pm-service
     class core
     user system
     group system net_raw
 
-service per_proxy /system/bin/pm-proxy
+service per_proxy /vendor/bin/pm-proxy
     class core
     user system
     group system net_raw
@@ -385,7 +385,7 @@ on property:ro.boot.hardware.sku=LGH791F
 on property:ro.boot.hardware.sku=LGH798
     setprop ro.boot.wificountrycode 00
 
-service thermal-engine /system/bin/thermal-engine
+service thermal-engine /vendor/bin/thermal-engine
     class main
     user root
     socket thermal-send-client stream 0666 system system
@@ -415,7 +415,7 @@ service loc_launcher /vendor/bin/loc_launcher
 	user gps
     group gps
 
-service cnss-daemon /system/bin/cnss-daemon -n -l
+service cnss-daemon /vendor/bin/cnss-daemon -n -l
     class late_start
 
 service vendor.qseecomd /vendor/bin/qseecomd
@@ -423,22 +423,25 @@ service vendor.qseecomd /vendor/bin/qseecomd
     user root
     group root
 
-service msm_irqbalance /system/bin/msm_irqbalance -f /vendor/etc/msm_irqbalance.conf
+service msm_irqbalance /vendor/bin/msm_irqbalance -f /vendor/etc/msm_irqbalance.conf
     socket msm_irqbalance seqpacket 660 root system
     class core
     user root
     group root
     writepid /dev/cpuset/system-background/tasks
 
-service time_daemon /system/bin/time_daemon
+service time_daemon /vendor/bin/time_daemon
     class late_start
     user root
     group root
 
 service vendor.charger /charger
     class charger
-    critical
     seclabel u:r:charger:s0
+    critical
+	user system
+	group system wakelock input
+	capabilities SYS_BOOT
 
 service qcamerasvr /vendor/bin/mm-qcamera-daemon
     class late_start
@@ -449,29 +452,29 @@ service qcamerasvr /vendor/bin/mm-qcamera-daemon
 on property:persist.radio.atfwd.start=false
     stop atfwd
 
-service atfwd /system/bin/ATFWD-daemon
+service atfwd /vendor/bin/ATFWD-daemon
     class late_start
     user system
     group system radio
 
-service ss_ramdump /system/bin/subsystem_ramdump
+service ss_ramdump /vendor/bin/subsystem_ramdump
     class main
     user root
     group root system
     disabled
 
-service cnd /system/bin/cnd
+service cnd /vendor/bin/cnd
     class late_start
     socket cnd stream 660 root inet
     group root wakelock
 
-service imsqmidaemon /system/bin/imsqmidaemon
+service imsqmidaemon /vendor/bin/imsqmidaemon
     class main
     user system
     socket ims_qmid stream 0660 system radio
     group radio net_raw log diag
 
-service imsdatadaemon /system/bin/imsdatadaemon
+service imsdatadaemon /vendor/bin/imsdatadaemon
     class main
     user system
     socket ims_datad stream 0660 system radio
