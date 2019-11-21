@@ -36,7 +36,7 @@ ifneq ($(filter bullhead, $(TARGET_DEVICE)),)
 
 include $(call all-makefiles-under,$(LOCAL_PATH))
 
-FIRMWARE_MOUNT_POINT := /vendor/firmware_mnt
+FIRMWARE_MOUNT_POINT := $(TARGET_OUT_VENDOR)/firmware_mnt
 ALL_DEFAULT_INSTALLED_MODULES += $(FIRMWARE_MOUNT_POINT)
 
 $(FIRMWARE_MOUNT_POINT):
