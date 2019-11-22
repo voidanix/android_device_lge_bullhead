@@ -33,8 +33,9 @@ TARGET_2ND_CPU_VARIANT_RUNTIME := cortex-a53.a57
 
 TARGET_NO_BOOTLOADER := true
 
-BOARD_ROOT_EXTRA_FOLDERS := persist
-BOARD_ROOT_EXTRA_SYMLINKS += /vendor/firmware_mnt:/firmware
+#BOARD_ROOT_EXTRA_FOLDERS := persist #maybe replace this with /mnt since it's /mnt/vendor/persist now, check the symlinks as well
+#BOARD_ROOT_EXTRA_SYMLINKS := /vendor/firmware_mnt:/firmware
+#BOARD_ROOT_EXTRA_SYMLINKS += /mnt/vendor/persist:/persist
 
 # Inline kernel
 BOARD_KERNEL_IMAGE_NAME := Image.gz-dtb

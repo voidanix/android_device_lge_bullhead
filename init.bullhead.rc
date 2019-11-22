@@ -104,7 +104,7 @@ on fs
     setprop persist.adb.nonblocking_ffs 0
     setprop ro.adb.nonblocking_ffs 0
 
-    restorecon_recursive /persist
+    restorecon_recursive /mnt/vendor/persist
 
 on late-fs
     # Start services for bootanim
@@ -219,11 +219,11 @@ on boot
 
 on post-fs
 
-    mkdir /persist/data 0700 system system
-    mkdir /persist/data/sfs 0700 system system
-    mkdir /persist/data/tz 0700 system system
-    mkdir /persist/data/app_g 0700 system system
-    mkdir /persist/widevine 0770 drm system
+    mkdir /mnt/vendor/persist/data 0700 system system
+    mkdir /mnt/vendor/persist/data/sfs 0700 system system
+    mkdir /mnt/vendor/persist/data/tz 0700 system system
+    mkdir /mnt/vendor/persist/data/app_g 0700 system system
+    mkdir /mnt/vendor/persist/widevine 0770 drm system
 
     # Busy loop to wait for qseecomd started
     exec - root root system -- /vendor/bin/init.bullhead.qseecomd.sh
@@ -276,12 +276,12 @@ on post-fs-data
     mkdir /data/misc/camera 0770 camera camera
 
     # Change permission for ldaf
-    chown input system /persist/calibration
-    chmod 0650 /persist/calibration
-    chown input system /persist/calibration/offset
-    chmod 0640 /persist/calibration/offset
-    chown input system /persist/calibration/xtalk
-    chmod 0640 /persist/calibration/xtalk
+    chown input system /mnt/vendor/persist/calibration
+    chmod 0650 /mnt/vendor/persist/calibration
+    chown input system /mnt/vendor/persist/calibration/offset
+    chmod 0640 /mnt/vendor/persist/calibration/offset
+    chown input system /mnt/vendor/persist/calibration/xtalk
+    chmod 0640 /mnt/vendor/persist/calibration/xtalk
 
     # Create directories for Location services
     mkdir /data/misc/location 0770 gps gps

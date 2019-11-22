@@ -182,13 +182,13 @@
 /system/bin/hw/nfc_hal_pn54x       u:object_r:nfc_hal_pn54x_exec:s0
 
 # Persist files
-/persist(/.*)?                     u:object_r:persist_file:s0
-/persist/data(/.*)?                u:object_r:persist_data_file:s0
-/persist/data/tz(/.*)?             u:object_r:persist_drm_file:s0
-/persist/data/app_g(/.*)?          u:object_r:persist_drm_file:s0
-/persist/wlan_mac\.bin             u:object_r:persist_wifi_file:s0
-/persist/sensorcal\.json           u:object_r:persist_sensortool_file:s0
-/persist/calibration(/.*)?         u:object_r:persist_camera_file:s0
+/mnt/vendor/persist(/.*)?                     u:object_r:persist_file:s0
+/mnt/vendor/persist/data(/.*)?                u:object_r:persist_data_file:s0
+/mnt/vendor/persist/data/tz(/.*)?             u:object_r:persist_drm_file:s0
+/mnt/vendor/persist/data/app_g(/.*)?          u:object_r:persist_drm_file:s0
+/mnt/vendor/persist/wlan_mac\.bin             u:object_r:persist_wifi_file:s0
+/mnt/vendor/persist/sensorcal\.json           u:object_r:persist_sensortool_file:s0
+/mnt/vendor/persist/calibration(/.*)?         u:object_r:persist_camera_file:s0
 
 # Firmware files
 /vendor/firmware(/.*)?                                           u:object_r:firmware_file:s0

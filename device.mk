@@ -30,7 +30,7 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/init.bullhead.usb.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/hw/init.bullhead.usb.rc \
     $(LOCAL_PATH)/fstab.bullhead:$(TARGET_COPY_OUT_VENDOR)/etc/fstab.bullhead \
     $(LOCAL_PATH)/fstab.bullhead:$(TARGET_COPY_OUT_RAMDISK)/fstab.bullhead \
-    $(LOCAL_PATH)/ueventd.bullhead.rc:$(TARGET_COPY_OUT_VENDOR)/ueventd.rc \
+    $(LOCAL_PATH)/ueventd.rc:$(TARGET_COPY_OUT_VENDOR)/ueventd.rc \
     $(LOCAL_PATH)/init.recovery.bullhead.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/hw/init.recovery.bullhead.rc \
     $(LOCAL_PATH)/init.bullhead.ramdump.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/hw/init.bullhead.ramdump.rc \
     $(LOCAL_PATH)/init.bullhead.fp.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/hw/init.bullhead.fp.rc \
@@ -498,7 +498,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     bluetooth.enable_timeout_ms=12000
 
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
-    ro.bt.bdaddr_path=/persist/bdaddr.txt
+    ro.bt.bdaddr_path=/mnt/vendor/persist/bdaddr.txt
 
 # Bluetooth HAL
 PRODUCT_PACKAGES += \
