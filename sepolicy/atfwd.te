@@ -13,7 +13,8 @@ binder_call(atfwd, system_app);
 
 allow atfwd self:udp_socket create;
 
-allow atfwd atfwd_service:service_manager find;
+# this is denied
+#allow atfwd atfwd_service:service_manager find;
 
 allow atfwd diag_device:chr_file rw_file_perms;
 
