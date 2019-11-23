@@ -245,6 +245,9 @@ PRODUCT_COPY_FILES += \
 	
 # GPS
 PRODUCT_PACKAGES += \
+    libgps.utils \
+    libgnss \
+    liblocation_api \
     gps.msm8992
 
 # NFC packages
@@ -368,6 +371,10 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.audio.fluence.speaker=true \
     persist.speaker.prot.enable=true \
     ro.config.vc_call_vol_steps=7
+
+# aptX
+PRODUCT_PROPERTY_OVERRIDES += \
+    persist.bluetooth.a2dp_offload.cap=sbc-aac-aptx-aptxhd-ldac
 
 # Default OMX service to non-Treble
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -531,7 +538,8 @@ PRODUCT_PACKAGES += \
 
 # Thermal HAL
 PRODUCT_PACKAGES += \
-    thermal.bullhead
+    thermal.bullhead \
+    android.hardware.thermal@2.0-service.mock
 
 # Trust
 PRODUCT_PACKAGES += \
