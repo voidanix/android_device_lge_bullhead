@@ -191,6 +191,9 @@
 /mnt/vendor/persist/calibration(/.*)?         u:object_r:persist_camera_file:s0
 
 # Firmware files
-/vendor/firmware(/.*)?                                           u:object_r:firmware_file:s0
-/vendor/firmware_mnt(/.*)?                                       u:object_r:firmware_file:s0
-/firmware(/.*)?                                                  u:object_r:firmware_file:s0
+/vendor/firmware(/.*)?                        u:object_r:firmware_file:s0
+/vendor/firmware_mnt(/.*)?                    u:object_r:firmware_file:s0
+
+# Deprecated mountpoints
+/persist                                      u:object_r:persist_file:s0
+/firmware                                     u:object_r:firmware_file:s0
