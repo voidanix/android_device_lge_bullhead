@@ -1,5 +1,5 @@
 # proc
-genfscon proc /irq u:object_r:proc_irq:s0
+genfscon proc /irq                               u:object_r:proc_irq:s0
 genfscon proc /sys/kernel/sched_migration_fixup  u:object_r:proc_kernel_sched:s0
 genfscon proc /sys/kernel/sched_upmigrate        u:object_r:proc_kernel_sched:s0
 genfscon proc /sys/kernel/sched_downmigrate      u:object_r:proc_kernel_sched:s0
