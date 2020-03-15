@@ -36,7 +36,13 @@
     <integer name="config_defaultNotificationLedOn">1000</integer>
 
     <!-- Default LED off time for notification LED in milliseconds. -->
-    <integer name="config_defaultNotificationLedOff">9000</integer>
+    <integer name="config_defaultNotificationLedOff">4000</integer>
+
+    <!-- Is the battery LED intrusive? Used to decide if there should be a disable option -->
+    <bool name="config_intrusiveBatteryLed">true</bool>
+
+    <!-- Does the battery LED support multiple colors? Used to decide if the user can change the colors -->
+    <bool name="config_multiColorBatteryLed">true</bool>
 
     <!-- reference volume index for music stream to limit headphone volume and display warning -->
     <integer name="config_safe_media_volume_index">5</integer>
@@ -54,6 +60,9 @@
 
     <!-- Boolean indicating if current platform supports HFP inband ringing -->
     <bool name="config_bluetooth_hfp_inband_ringing_support">true</bool>
+
+    <!-- Tell captive portal to die off -->
+    <integer translatable="false" name="config_captive_portal_mode">0</integer>
 
     <!-- Setting this true forces the headset jack switches to use the/dev/input/event subsystem
          rather than the uevent framework. -->
@@ -334,6 +343,9 @@
          option. -->
     <bool name="config_device_respects_hold_carrier_config">false</bool>
 
+    <!-- If this is true, device supports Sustained Performance Mode. -->
+    <bool name="config_sustainedPerformanceModeSupported">true</bool>
+
     <!-- Default list of files pinned by the Pinner Service -->
     <string-array translatable="false" name="config_defaultPinnerServiceFiles">
         <item>"/system/framework/arm64/boot-framework.oat"</item>
@@ -343,15 +355,21 @@
         <item>"/system/framework/arm64/boot.oat"</item>
         <item>"/system/framework/arm64/boot-core-libart.oat"</item>
         <item>"/system/lib/libsurfaceflinger.so"</item>
-        <item>"/system/priv-app/SystemUI/SystemUI.apk"</item>
-        <item>"/data/dalvik-cache/arm64/system@product@priv-app@SystemUI@SystemUI.apk@classes.dex"</item>
-        <item>"/data/dalvik-cache/arm64/system@product@priv-app@SystemUI@SystemUI.apk@classes.vdex"</item>
-	    <item>"/apex/com.android.runtime/javalib/core-oj.jar"</item>
+	<item>"/apex/com.android.runtime/javalib/core-oj.jar"</item>
         <item>"/apex/com.android.runtime/javalib/core-libart.jar"</item>
         <item>"/apex/com.android.media/javalib/updatable-media.jar"</item>
-   </string-array>
+    </string-array>
 
-   <!-- Enable system navigation keys. -->
-   <bool name="config_supportSystemNavigationKeys">true</bool>
+    <!-- Boolean indicating whether the HWC setColorTransform function can be performed efficiently
+    in hardware. -->
+    <bool name="config_setColorTransformAccelerated">true</bool>
 
+    <!-- enable doze powersaving mode -->
+    <bool name="config_enableAutoPowerModes">true</bool>
+
+    <!-- Should the pinner service pin the Home application? -->
+    <bool name="config_pinnerHomeApp">true</bool>
+
+    <!-- Enable system navigation keys. -->
+    <bool name="config_supportSystemNavigationKeys">true</bool>
 </resources>

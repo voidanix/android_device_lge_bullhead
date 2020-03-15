@@ -180,7 +180,7 @@ PRODUCT_PACKAGES += \
     libgenlock \
     memtrack.msm8992 \
     android.hardware.memtrack@1.0-impl \
-	android.hardware.memtrack@1.0-service
+    android.hardware.memtrack@1.0-service
 
 # Light HAL
 PRODUCT_PACKAGES += \
@@ -296,9 +296,6 @@ PRODUCT_PACKAGES += \
 # Snap Config
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.camera.cpp.duplication=false
-
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/configs/external_camera_config.xml:$(TARGET_COPY_OUT_VENDOR)/etc/external_camera_config.xml
 
 # Sensor & activity_recognition HAL
 TARGET_USES_NANOHUB_SENSORHAL := true
@@ -438,6 +435,18 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.telephony.default_cdma_sub=0 \
     persist.qcril.disable_retry=true
+
+PRODUCT_PACKAGES += \
+    telephony-ext \
+    ims-ext-common \
+    ims_ext_common.xml \
+    qti-telephony-hidl-wrapper \
+    qti_telephony_hidl_wrapper.xml \
+    qti-telephony-utils \
+    qti_telephony_utils.xml
+
+PRODUCT_BOOT_JARS += \
+    telephony-ext
 
 # LTE, CDMA, GSM/WCDMA
 PRODUCT_PROPERTY_OVERRIDES += \

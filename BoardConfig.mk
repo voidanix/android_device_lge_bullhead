@@ -14,8 +14,9 @@
 # limitations under the License.
 #
 
+# Build haxx
+#BUILD_BROKEN_PHONY_TARGETS := true
 BUILD_BROKEN_DUP_RULES := true
-BUILD_BROKEN_PHONY_TARGETS := true
 
 TARGET_ARCH := arm64
 TARGET_ARCH_VARIANT := armv8-a
@@ -63,6 +64,7 @@ BOARD_MKBOOTIMG_ARGS := --ramdisk_offset $(BOARD_RAMDISK_OFFSET) --tags_offset $
 TARGET_FLATTEN_APEX := true
 
 BOARD_USES_ALSA_AUDIO := true
+AUDIO_FEATURE_ENABLED_DSM_FEEDBACK := true
 AUDIO_FEATURE_ENABLED_MULTI_VOICE_SESSIONS := true
 BOARD_SUPPORTS_SOUND_TRIGGER := true
 AUDIO_FEATURE_ENABLED_SPKR_PROTECTION := true
@@ -158,12 +160,13 @@ BOARD_CHARGER_ENABLE_SUSPEND := true
 BOARD_VENDOR_QCOM_GPS_LOC_API_HARDWARE := $(TARGET_BOARD_PLATFORM)
 BOARD_VENDOR_QCOM_LOC_PDK_FEATURE_SET := true
 
-BOARD_VENDOR_SEPOLICY_DIRS += \
-    device/lge/bullhead/sepolicy
+BOARD_VENDOR_SEPOLICY_DIRS += device/lge/bullhead/sepolicy
+SELINUX_IGNORE_NEVERALLOWS := true
 
 TARGET_USES_64_BIT_BINDER := true
 
 TARGET_USES_AOSP := true
+ENABLE_SCHEDBOOST := true
 TARGET_USES_INTERACTION_BOOST := true
 
 # Recovery
@@ -175,6 +178,10 @@ LZMA_RAMDISK_TARGETS := recovery
 # Once camera module can run in the native mode of the system (either
 # 32-bit or 64-bit), the following line should be deleted
 BOARD_QTI_CAMERA_32BIT_ONLY := true
+
+# Use QTI camera
+TARGET_USES_QTI_CAMERA_DEVICE := true
+USE_DEVICE_SPECIFIC_CAMERA := true
 
 #Enable peripheral manager
 TARGET_PER_MGR_ENABLED := true
