@@ -35,7 +35,9 @@ TARGET_2ND_CPU_VARIANT_RUNTIME := cortex-a53.a57
 TARGET_NO_BOOTLOADER := true
 
 BOARD_ROOT_EXTRA_SYMLINKS := /mnt/vendor/persist:/persist
+ifeq ($(PRODUCT_USE_QC_SPECIFIC_SYMLINKS), true)
 BOARD_ROOT_EXTRA_SYMLINKS += /vendor/firmware_mnt:/firmware
+endif
 
 # Inline kernel
 BOARD_KERNEL_IMAGE_NAME := Image.gz-dtb
