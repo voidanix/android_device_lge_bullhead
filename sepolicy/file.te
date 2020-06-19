@@ -6,13 +6,18 @@ type debugfs_bufinfo, fs_type, debugfs_type;
 type sysfs_power_management, fs_type, sysfs_type;
 type sysfs_surfaceflinger, fs_type, sysfs_type;
 
+type sysfs_rndis, fs_type, sysfs_type;
+
 # file type for irqbalance socket
 type msm_irqbalance_socket, file_type;
 
-# Default type for anything under /vendor/firmware_mnt
-#type firmware_file, fs_type, contextmount_type; this one should be deprecated in favor of the following:
-type firmware_file, file_type, contextmount_type, vendor_file_type;
-type vendor_firmware_file, vendor_file_type, file_type;
+# Default type for anything under /vendor/firmware
+type firmware_file, fs_type, contextmount_type;
+type vendor_firmware_file, file_type, vendor_file_type;
+
+allow vendor_firmware_file self:filesystem associate;
+allow rootfs labeledfs:filesystem associate;
+
 type fsg_file, fs_type, contextmount_type;
 
 type cnd_socket, file_type;
@@ -26,6 +31,9 @@ type location_app_data_file, file_type, data_file_type;
 
 # Socket node needed by ims_data daemon
 type ims_socket, file_type;
+
+# timekeep/timedaemon file type
+type time_data_file, file_type, data_file_type, core_data_file_type;
 
 type ramdump_data_file, file_type, data_file_type, core_data_file_type;
 type diag_logs, file_type, data_file_type, core_data_file_type, mlstrustedobject;
@@ -43,16 +51,16 @@ type sysfs_devices_fingerprint,  sysfs_type, fs_type;
 type sysfs_camera, sysfs_type, fs_type;
 
 # type for persist partition
-type persist_file, file_type;
-type persist_data_file, file_type;
-type persist_drm_file, file_type;
+type persist_file, vendor_persist_type, file_type;
+type persist_data_file, vendor_persist_type, file_type;
+type persist_drm_file, vendor_persist_type, file_type;
 type persist_wifi_file, file_type;
 type persist_sensortool_file, file_type;
 type persist_camera_file, file_type;
 
 # File types required by mdm-helper
-type sysfs_ssr,  sysfs_type, fs_type;
-type sysfs_ssr_toggle,  sysfs_type, fs_type;
+type sysfs_msm_subsys, sysfs_type, fs_type;
+type sysfs_msm_subsys_restart, sysfs_type, fs_type;
 type sysfs_hsic, sysfs_type, fs_type;
 type sysfs_hsic_host_rdy, sysfs_type, fs_type;
 
@@ -69,7 +77,6 @@ type nanohub_lock_file, file_type, data_file_type, core_data_file_type;
 
 # SurfaceFlinger file type for sysfs access
 type sysfs_graphics, sysfs_type, fs_type;
-type sysfs_display, sysfs_type, fs_type;
 
 # Files accessed by qcom-system-daemon
 type sysfs_socinfo, fs_type, sysfs_type;
@@ -99,13 +106,7 @@ type sysfs_battery, fs_type, sysfs_type;
 type sysfs_wlan0, fs_type, sysfs_type;
 
 # type for storaged
-type sysfs_mmcblk0, fs_type, sysfs_type;
-
-# types for hal_light_default
-type sysfs_backlight, fs_type, sysfs_type;
-type sysfs_qpnp_25, fs_type, sysfs_type;
-
-type netmgrd_socket, file_type;
+type sysfs_mmc, fs_type, sysfs_type;
 
 # type for init
 type sysfs_g_android_param, fs_type, sysfs_type;
@@ -117,17 +118,9 @@ type debugfs_rmt_storage, fs_type, debugfs_type;
 # type for perfs
 type sysfs_ksm, fs_type, sysfs_type;
 
-# type for hal_memtrack_default
-type debugfs_mem, fs_type, debugfs_type;
-
-# type for netd
-type sysfs_rmnet, fs_type, sysfs_type;
+type netmgrd_socket, file_type;
+type wifihal_socket, file_type;
 
 # type for init
-type sysfs_block, fs_type, sysfs_type;
 type sysfs_rfkill0, fs_type, sysfs_type;
-type sysfs_subsys1, fs_type, sysfs_type;
-type sysfs_mmcblk0_queue, fs_type, sysfs_type;
-
-# firmware additions for pixelism
-allow firmware_file self:filesystem associate;
+type sysfs_poweroff, sysfs_type, fs_type;

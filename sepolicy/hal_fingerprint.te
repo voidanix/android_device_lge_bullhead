@@ -12,7 +12,7 @@ allow hal_fingerprint uhid_device:chr_file rw_file_perms;
 allow hal_fingerprint sysfs_devices_fingerprint:dir r_dir_perms;
 allow hal_fingerprint sysfs_devices_fingerprint:file rw_file_perms;
 
-# allow access to /mnt/vendor/persist
+# allow access to /persist
 allow hal_fingerprint persist_file:dir search;
 
 # allow access to sysfs files

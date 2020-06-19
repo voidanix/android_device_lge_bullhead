@@ -31,7 +31,12 @@ dontaudit perfd self:capability kill;
 
 allow perfd cameraserver:process signull;
 
-#allow perfd perfd:capability { dac_override };
-
 allow perfd sysfs_ksm:dir { search read open };
 allow perfd sysfs_ksm:file rw_file_perms;
+
+allow perfd vendor_file:dir r_dir_perms;
+
+allow perfd sysfs:dir r_dir_perms;
+allow perfd sysfs:file rw_file_perms;
+allow perfd sysfs_kgsl:dir r_dir_perms;
+allow perfd proc:file r_file_perms;

@@ -18,7 +18,6 @@
 /system/bin/athdiag
 /system/bin/cnd
 /system/bin/cnss-daemon
-/system/bin/cnss_diag
 /system/bin/diag_klog
 /system/bin/diag_mdlog
 /system/bin/diag_qshrink4_daemon
@@ -61,7 +60,6 @@
 /system/bin/subsystem_ramdump
 /system/bin/test_diag
 /system/bin/thermal-engine
-/system/bin/time_daemon
 /system/etc/acdbdata/MTP/MTP_Bluetooth_cal.acdb
 /system/etc/acdbdata/MTP/MTP_General_cal.acdb
 /system/etc/acdbdata/MTP/MTP_Global_cal.acdb

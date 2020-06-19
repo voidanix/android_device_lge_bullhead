@@ -48,6 +48,9 @@ on charger
     write /sys/module/lpm_levels/system/a53/a53-l2-retention/idle_enabled 0
     write /sys/module/lpm_levels/system/a57/a57-l2-retention/idle_enabled 0
 
+on early-fs
+    start vold
+
 on property:sys.boot_completed=1
     # Allow CPUs to go in deeper idle state than C0
     write /sys/module/lpm_levels/parameters/sleep_disabled 0
@@ -62,7 +65,6 @@ on property:sys.boot_completed=1
     write /sys/block/mmcblk0/queue/iostats 0
     write /sys/block/mmcblk0/queue/add_random 0
     write /sys/block/mmcblk0/queue/iosched/slice_idle 0
-	swapon_all /vendor/etc/fstab.bullhead
 
     # according to Qcom this legacy value improves first launch latencies
     # stock value is 512k
@@ -71,37 +73,29 @@ on property:sys.boot_completed=1
     # Set custom LMK parameters
     write /sys/module/lowmemorykiller/parameters/minfree 18432,23040,27648,32256,50176,75520
 
-on init
-    start vendor.qseecomd
+    stop cameraserver
+    start vendor.qcamerasvr
+    start cameraserver
 
-    # Load persistent dm-verity state
-    #verity_load_state
+on init
+    wait /dev/block/platform/soc.0/f9824900.sdhci
+    symlink /dev/block/platform/soc.0/f9824900.sdhci /dev/block/bootdevice
+
+    start vendor.qseecomd
 
     # NXP HAL expects /dev/pn54x
     symlink /dev/pn548 /dev/pn54x
 
-    # Create UDS structure for base VR services.
-    mkdir /dev/socket/pdx 0775 system system
-    mkdir /dev/socket/pdx/system 0775 system system
-    mkdir /dev/socket/pdx/system/buffer_hub 0775 system system
-    mkdir /dev/socket/pdx/system/performance 0775 system system
-    mkdir /dev/socket/pdx/system/vr 0775 system system
-    mkdir /dev/socket/pdx/system/vr/display 0775 system system
-    mkdir /dev/socket/pdx/system/vr/pose 0775 system system
-    mkdir /dev/socket/pdx/system/vr/sensors 0775 system system
-
+    # ZRAM setup
     write /sys/block/zram0/comp_algorithm lz4
-    write /sys/block/zram0/max_comp_streams 6
-
     write /proc/sys/vm/page-cluster 0
 
 on fs
-    wait /dev/block/platform/soc.0/f9824900.sdhci
-    symlink /dev/block/platform/soc.0/f9824900.sdhci /dev/block/bootdevice
-
-    mkdir -p /mnt/vendor/persist
-    mkdir -p /vendor/firmware_mnt
     mount_all /vendor/etc/fstab.bullhead --early
+
+    mkdir /mnt/vendor/persist
+    mkdir /vendor/firmware
+    mkdir /vendor/firmware_mnt
     setprop sys.usb.ffs.aio_compat 1
     setprop persist.adb.nonblocking_ffs 0
     setprop ro.adb.nonblocking_ffs 0
@@ -114,10 +108,12 @@ on fs
     restorecon_recursive /mnt/vendor/persist/
 
 on late-fs
+    start devstart_sh
+
     # Start services for bootanim
     start surfaceflinger
     start bootanim
-
+    start vendor.hwcomposer-2-1
     start vendor.configstore-hal
     start vendor.gralloc-2-0
 
@@ -127,6 +123,7 @@ on late-fs
     wait_for_prop hwservicemanager.ready true
     # Mount RW partitions which need run fsck
     mount_all /vendor/etc/fstab.bullhead --late
+    swapon_all /vendor/etc/fstab.bullhead
 
 on early-boot
     # Set RLIMIT_MEMLOCK to 64MB
@@ -140,9 +137,6 @@ on early-boot
 
     # Update dm-verity state and set partition.*.verified properties
     #verity_update_state
-
-    # Busy loop to wait for devices booted by devstart_sh just in case device not ready
-    exec - root root system -- /vendor/bin/init.qcom.devwait.sh
 
 on boot
     # Execute script to set initial CPU settings
@@ -229,7 +223,6 @@ on post-fs
     # Busy loop to wait for qseecomd started
     exec - root root system -- /vendor/bin/init.bullhead.qseecomd.sh
     # Start devices by sysfs trigger
-    start devstart_sh
 
     # Allow writing to the kernel trace log.
     chmod 0222 /sys/kernel/debug/tracing/trace_marker
@@ -253,9 +246,6 @@ on post-fs-data
     # Update touch firmware if required
     write /sys/bus/i2c/devices/2-0020/check_fw 1
     write /sys/devices/soc.0/f9924000.i2c/power/control on
-
-    # Create /data/time folder for time-services
-    mkdir /data/time 0700 system system
 
     # Create the directories used by the Wireless subsystem
     mkdir /data/vendor/wifi 0770 wifi wifi
@@ -389,10 +379,10 @@ on property:ro.boot.hardware.sku=LGH798
 service thermal-engine /vendor/bin/thermal-engine
     class main
     user root
-    socket thermal-send-client stream 0666 system system
+    socket thermal-send-client stream 0660 system system
     socket thermal-recv-client stream 0660 system system
-    socket thermal-recv-passive-client stream 0666 system system
-    group root
+    socket thermal-recv-passive-client stream 0660 system system
+    group root radio system
 
 service wpa_supplicant /vendor/bin/hw/wpa_supplicant \
     -O/data/vendor/wifi/wpa/sockets \
@@ -413,7 +403,7 @@ service wpa_supplicant /vendor/bin/hw/wpa_supplicant \
 service loc_launcher /vendor/bin/loc_launcher
     # loc_launcher will start as gps
     class late_start
-	user gps
+    user gps
     group gps
 
 service cnss-daemon /vendor/bin/cnss-daemon -n -l
@@ -431,23 +421,19 @@ service msm_irqbalance /vendor/bin/msm_irqbalance -f /vendor/etc/msm_irqbalance.
     group root
     writepid /dev/cpuset/system-background/tasks
 
-service time_daemon /vendor/bin/time_daemon
-    class late_start
-    user root
-    group root
-
 service vendor.charger /charger
     class charger
     seclabel u:r:charger:s0
     critical
-	user system
-	group system wakelock input
-	capabilities SYS_BOOT
+    user system
+    group system wakelock input
+    capabilities SYS_BOOT
 
-service qcamerasvr /vendor/bin/mm-qcamera-daemon
+service vendor.qcamerasvr /vendor/bin/mm-qcamera-daemon
     class late_start
     user camera
     group camera system inet input graphics
+    disabled
     writepid /dev/cpuset/system-background/tasks
 
 on property:persist.radio.atfwd.start=false
@@ -485,7 +471,7 @@ service imsdatadaemon /vendor/bin/imsdatadaemon
 on property:sys.ims.QMI_DAEMON_STATUS=1
     start imsdatadaemon
 
-service bullhead-sh /vendor/bin/init.bullhead.sh
+service init-radio-sh /vendor/bin/init.radio.sh
     class late_start
     user radio
     group system
@@ -497,7 +483,6 @@ service bugreport /system/bin/dumpstate -d -p -B -z \
     class main
     disabled
     oneshot
-    keycodes 114 115 116
 
 service devstart_sh /vendor/bin/init.qcom.devstart.sh
     class main
@@ -508,4 +493,6 @@ service devstart_sh /vendor/bin/init.qcom.devstart.sh
 
 on property:apexd.status=ready
     mount none /system/etc/swcodec/ld.config.txt /apex/com.android.media.swcodec/etc/ld.config.txt bind
-    symlink /system/lib64/libashmemd_client.so /system/apex/com.android.media.swcodec/lib64/libashmemd_client.so
+
+on property:vold.decrypt=trigger_restart_framework
+    restart vendor.camera-provider-2-4

@@ -1,0 +1,17 @@
+allow vendor_init time_data_file:dir { search setattr };
+allow vendor_init time_data_file:file setattr;
+allow vendor_init radio_data_file:dir { search setattr };
+allow vendor_init radio_data_file:file { write setattr };
+allow vendor_init cnd_data_file:dir { search setattr };
+allow vendor_init camera_data_file:dir { search setattr };
+allow vendor_init camera_data_file:file setattr;
+allow vendor_init location_data_file:dir { search setattr };
+allow vendor_init location_data_file:file setattr;
+allow vendor_init audio_data_file:dir { search setattr };
+allow vendor_init audio_data_file:file setattr;
+allow vendor_init perfd_data_file:dir { search setattr write };
+allow vendor_init perfd_data_file:file setattr;
+allow vendor_init ramdump_data_file:dir { search setattr };
+allow vendor_init ramdump_data_file:file setattr;
+allow vendor_init fingerprintd_data_file:dir { search setattr };
+allow vendor_init fingerprintd_data_file:file setattr;

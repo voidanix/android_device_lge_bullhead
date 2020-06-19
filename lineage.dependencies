@@ -1,6 +1,26 @@
 [
   {
-    "repository": "android_kernel_lge_bullhead",
-    "target_path": "kernel/lge/bullhead"
+    "repository": "voidanix/android_kernel_lge_bullhead",
+    "target_path": "kernel/lge/bullhead",
+    "branch": "lineage-17.1",
+    "remote": "github"
+  },
+  {
+    "repository": "voidanix/android_vendor_lge_bullhead",
+    "target_path": "vendor/lge/bullhead",
+    "branch": "lineage-17.1",
+    "remote": "github"
+  },
+  {
+    "repository"  : "PixelExperience/hardware_qcom_display",
+    "target_path" : "hardware/qcom/display",
+    "branch"      : "ten",
+    "remote"      : "github"
+  },
+  {
+    "repository"  : "PixelExperience/hardware_qcom_bt",
+    "target_path" : "hardware/qcom/bt",
+    "branch"      : "ten",
+    "remote"      : "github"
   }
 ]

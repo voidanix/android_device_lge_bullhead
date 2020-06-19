@@ -14,10 +14,6 @@
 # limitations under the License.
 #
 
-# Build haxx
-#BUILD_BROKEN_PHONY_TARGETS := true
-BUILD_BROKEN_DUP_RULES := true
-
 TARGET_ARCH := arm64
 TARGET_ARCH_VARIANT := armv8-a
 TARGET_CPU_ABI := arm64-v8a
@@ -30,14 +26,12 @@ TARGET_2ND_ARCH_VARIANT := armv8-a
 TARGET_2ND_CPU_ABI := armeabi-v7a
 TARGET_2ND_CPU_ABI2 := armeabi
 TARGET_2ND_CPU_VARIANT := generic
-TARGET_2ND_CPU_VARIANT_RUNTIME := cortex-a53.a57
+TARGET_2ND_CPU_VARIANT_RUNTIME := cortex-a53
 
 TARGET_NO_BOOTLOADER := true
 
 BOARD_ROOT_EXTRA_SYMLINKS := /mnt/vendor/persist:/persist
-ifeq ($(PRODUCT_USE_QC_SPECIFIC_SYMLINKS), true)
 BOARD_ROOT_EXTRA_SYMLINKS += /vendor/firmware_mnt:/firmware
-endif
 
 # Inline kernel
 BOARD_KERNEL_IMAGE_NAME := Image.gz-dtb
@@ -57,9 +51,10 @@ BOARD_KERNEL_TAGS_OFFSET := 0x01E00000
 BOARD_RAMDISK_OFFSET     := 0x02000000
 
 BOARD_KERNEL_CMDLINE := console=ttyHSL0,115200,n8 androidboot.hardware=bullhead boot_cpus=0-5
-BOARD_KERNEL_CMDLINE += lpm_levels.sleep_disabled=1 msm_poweroff.download_mode=0 swiotlb=2048
-BOARD_KERNEL_CMDLINE += loop.max_part=7 androidboot.selinux=permissive androidboot.boot_devices=soc.0/f9824900.sdhci
+BOARD_KERNEL_CMDLINE += lpm_levels.sleep_disabled=1 msm_poweroff.download_mode=0
+BOARD_KERNEL_CMDLINE += loop.max_part=7
 BOARD_KERNEL_CMDLINE += firmware_class.path=/vendor/firmware
+#BOARD_KERNEL_CMDLINE += androidboot.selinux=permissive
 
 BOARD_MKBOOTIMG_ARGS := --ramdisk_offset $(BOARD_RAMDISK_OFFSET) --tags_offset $(BOARD_KERNEL_TAGS_OFFSET)
 
@@ -91,8 +86,6 @@ WIFI_DRIVER_FW_PATH_AP  := "ap"
 WIFI_HIDL_FEATURE_DISABLE_AP_MAC_RANDOMIZATION := true
 
 BOARD_USES_SECURE_SERVICES := true
-
-#BOARD_HAS_FINGERPRINT_FPC := true
 
 TARGET_NO_RADIOIMAGE := true
 TARGET_BOARD_PLATFORM := msm8992
@@ -149,13 +142,8 @@ BOARD_VENDORIMAGE_PARTITION_SIZE := 260046848
 BOARD_VENDORIMAGE_FILE_SYSTEM_TYPE := ext4
 BOARD_FLASH_BLOCK_SIZE := 131072
 
-# Use mke2fs to create ext4 images
-TARGET_USES_MKE2FS := true
-
 # Build a separate vendor.img
 TARGET_COPY_OUT_VENDOR := vendor
-
-TARGET_RECOVERY_FSTAB = device/lge/bullhead/fstab.bullhead
 
 BOARD_CHARGER_ENABLE_SUSPEND := true
 
@@ -163,7 +151,6 @@ BOARD_VENDOR_QCOM_GPS_LOC_API_HARDWARE := $(TARGET_BOARD_PLATFORM)
 BOARD_VENDOR_QCOM_LOC_PDK_FEATURE_SET := true
 
 BOARD_VENDOR_SEPOLICY_DIRS += device/lge/bullhead/sepolicy
-SELINUX_IGNORE_NEVERALLOWS := true
 
 TARGET_USES_64_BIT_BINDER := true
 
@@ -171,19 +158,17 @@ TARGET_USES_AOSP := true
 ENABLE_SCHEDBOOST := true
 TARGET_USES_INTERACTION_BOOST := true
 
+# Display
+TARGET_SCREEN_DENSITY := 420
+
 # Recovery
 TARGET_RECOVERY_UI_LIB := librecovery_ui_nanohub
 TARGET_RECOVERY_FSTAB = device/lge/bullhead/fstab.bullhead
-LZMA_RAMDISK_TARGETS := recovery
 
 # Force camera module to be compiled only in 32-bit mode on 64-bit systems
 # Once camera module can run in the native mode of the system (either
 # 32-bit or 64-bit), the following line should be deleted
 BOARD_QTI_CAMERA_32BIT_ONLY := true
-
-# Use QTI camera
-TARGET_USES_QTI_CAMERA_DEVICE := true
-USE_DEVICE_SPECIFIC_CAMERA := true
 
 #Enable peripheral manager
 TARGET_PER_MGR_ENABLED := true
@@ -198,15 +183,6 @@ BOARD_PERFSETUP_SCRIPT := platform_testing/scripts/perf-setup/bullhead-setup.sh
 # Vendor interface manifests
 DEVICE_MANIFEST_FILE := device/lge/bullhead/manifest.xml
 DEVICE_MATRIX_FILE := device/lge/bullhead/compatibility_matrix.xml
-
-ifeq ($(TARGET_PRODUCT),aosp_bullhead_svelte)
-BOARD_KERNEL_CMDLINE += mem=1024M maxcpus=2
-MALLOC_SVELTE := true
-endif
-ifeq ($(TARGET_PRODUCT),bullhead_svelte)
-BOARD_KERNEL_CMDLINE += mem=1024M
-MALLOC_SVELTE := true
-endif
 
 # Legacy blob support
 TARGET_PROCESS_SDK_VERSION_OVERRIDE += \

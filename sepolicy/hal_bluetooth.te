@@ -6,6 +6,9 @@ allow hal_bluetooth start_hci_filter:unix_stream_socket connectto;
 
 set_prop(hal_bluetooth, wc_transport_prop)
 
-# read /mnt/vendor/persist/bdaddr.txt
+# read /persist/bdaddr.txt
 allow hal_bluetooth persist_file:dir search;
 allow hal_bluetooth persist_file:file r_file_perms;
+
+allow hal_bluetooth_default mnt_vendor_file:dir search;
+allow hal_bluetooth mnt_vendor_file:file r_file_perms;
