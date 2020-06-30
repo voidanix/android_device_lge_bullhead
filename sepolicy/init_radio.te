@@ -10,3 +10,7 @@ allow init_radio radio_data_file:dir create_dir_perms;
 
 # execute toybox/toolbox
 allow init_radio vendor_toolbox_exec:file rx_file_perms;
+
+allow init_radio vendor_file:dir r_dir_perms;
+
+allow init_radio vendor_firmware_file:dir r_dir_perms;
