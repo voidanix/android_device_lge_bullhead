@@ -13,3 +13,6 @@ allow servicemanager hal_audio_default:process getattr;
 allow servicemanager hal_camera_default:dir search;
 allow servicemanager hal_camera_default:file { read open };
 allow servicemanager hal_camera_default:process getattr;
+allow servicemanager mediaswcodec:dir search;
+allow servicemanager mediaswcodec:file r_file_perms;
+allow servicemanager mediaswcodec:process getattr;
