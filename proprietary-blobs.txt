@@ -79,7 +79,7 @@
 /system/etc/permissions/qcrilhook.xml
 /system/etc/permissions/qti_permissions.xml
 /system/etc/permissions/rcsservice.xml
-/system/etc/qcril.db
+/vendor/etc/qcril.db
 /system/etc/qmi_fw.conf
 /system/etc/sap.conf
 /system/etc/thermal-engine-8992.conf

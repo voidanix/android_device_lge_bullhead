@@ -259,7 +259,7 @@ on post-fs-data
     mkdir /data/vendor/nfc 0770 nfc nfc
 
     # Use qcril.db to handle Ecc and load MBN
-    copy /system/etc/qcril.db /data/misc/radio/qcril.db
+    copy /vendor/etc/qcril.db /data/misc/radio/qcril.db
     chown radio radio /data/misc/radio/qcril.db
     chmod 0600 /data/misc/radio/qcril.db
 

@@ -22,7 +22,7 @@ allow rild audioserver_service:service_manager find;
 allow rild mediaserver_service:service_manager find;
 allow rild per_mgr_service:service_manager find;
 
-# rild reads qcril.db linked to /system/etc/qcril.db
+# rild reads qcril.db linked to /vendor/etc/qcril.db
 allow rild radio_data_file:lnk_file read;
 
 # allow rild to access radio data file
